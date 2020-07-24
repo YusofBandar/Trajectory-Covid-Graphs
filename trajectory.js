@@ -8,28 +8,45 @@ window.onload = () => {
       .attr('height', height)
       .style('background', '#728ca2');
 
-    const trajectory = svg.append('g')
-       .style('transform', 'translate(50px, 50px)')
+    appendTrajectory(svg, 'Alaska', 0, 200, 200);
+
+}
 
 
-    const tWidth = 80;
+const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
+    const tGroup = selection.append('g')
+       .style('transform', `translate(${x}px, ${y}px)`)
 
-    trajectory
+    // start cap
+    tGroup
         .append('circle')
         .attr('r', 4)
-        .attr('cx', 4)
+        .attr('cx', 0)
         .attr('cy', 0)
         .style('fill', 'white')
 
-    trajectory
+    const lGroup  = tGroup
+          .append('g')
+          .style('transform', `rotate(${angle}deg)`);
+
+    // line
+    lGroup
         .append('path')
-        .attr('d', `M 0 0 l ${tWidth} 0`)
+        .attr('d', `M 0 0 l ${width} ${0}`)
         .style('stroke', 'white')
         .style('stroke-width', '2px')
 
-    trajectory
+    // end cap
+    lGroup
         .append('polygon')
-        .attr('points', `${tWidth},0 ${tWidth},-6 ${tWidth + 12},0 ${tWidth},6`)
+        .attr('points', `${width},0 ${width},-6 ${width + 12},0 ${width},6`)
         .style('fill', 'white');
 
-}
+    //label
+    tGroup
+        .append('text')
+        .text(label)
+        .attr('x', -5)
+        .attr('y', -10)
+        .style('fill', 'white')
+};
