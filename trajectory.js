@@ -13,6 +13,8 @@ const data = [
     }
 ];
 
+const seriesData = [100, 80, 90, 110, 130, 150, 130, 200, 30, 50, 70];
+
 window.onload = () => {
     const width = 1000;
     const height = 500;
@@ -24,6 +26,18 @@ window.onload = () => {
                   .style('background', '#728ca2');
 
     appendTrajectories(svg, data);
+
+    const [positiveScale, negativeScale] = angleScales(seriesData);
+
+    let i = 0;
+    const t = d3.interval(() => {
+        i += 1;
+
+        const angle = seriesData[i] > seriesData[0] ? positiveScale(seriesData[i]) : negativeScale(seriesData[i]);
+        updateTrajectory(svg, 'Idaho', angle);
+
+        i === seriesData.length - 1 && t.stop();
+    }, 1000);
 }
 
 const angleScales = (data) => {
