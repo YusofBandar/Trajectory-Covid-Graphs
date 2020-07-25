@@ -1,28 +1,59 @@
+const data = [
+    {
+        label: 'Wash.',
+        angle: 0,
+        x: 20,
+        y: 20
+    },
+    {
+        label: 'Idaho',
+        angle: 0,
+        x: 120,
+        y: 20
+    }
+];
+
 window.onload = () => {
     const width = 1000;
     const height = 500;
 
     const svg = d3.select('body')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-      .style('background', '#728ca2');
+                  .append('svg')
+                  .attr('width', width)
+                  .attr('height', height)
+                  .style('background', '#728ca2');
 
-    appendTrajectory(svg, 'Alaska', 0, 200, 200);
-
+    appendTrajectories(svg, data);
 }
+
+const appendTrajectories = (selection, data) => {
+    const trajectories = selection
+          .selectAll('.trajectory')
+          .data(data)
+          .enter()
+
+    trajectories.each((d) => {
+        appendTrajectory(selection, d.label, d.angle, d.x, d.y);
+    })
+};
+
 
 
 const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
-    const tGroup = selection.append('g')
-       .style('transform', `translate(${x}px, ${y}px)`)
+    const xPadding = 10;
+    const yPadding = 10;
+
+    const tGroup = selection
+          .append('g')
+          .attr('class', 'trajectory')
+          .style('transform', `translate(${x}px, ${y}px)`);
 
     // start cap
     tGroup
         .append('circle')
         .attr('r', 4)
-        .attr('cx', 0)
-        .attr('cy', 0)
+        .attr('cx', xPadding)
+        .attr('cy', yPadding)
         .style('fill', 'white')
 
     const lGroup  = tGroup
@@ -32,21 +63,26 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
     // line
     lGroup
         .append('path')
-        .attr('d', `M 0 0 l ${width} ${0}`)
+        .attr('d', `M ${xPadding} ${yPadding} l ${width} 0`)
         .style('stroke', 'white')
         .style('stroke-width', '2px')
 
     // end cap
     lGroup
         .append('polygon')
-        .attr('points', `${width},0 ${width},-6 ${width + 12},0 ${width},6`)
+        .attr('points',
+              `${width + xPadding},`+
+              `${yPadding} ${width + xPadding},`+
+              `4 ${width + xPadding + 12},`+
+              `${yPadding} ${width + xPadding},`+
+              `${ yPadding + 6 }`)
         .style('fill', 'white');
 
     //label
     tGroup
         .append('text')
         .text(label)
-        .attr('x', -5)
-        .attr('y', -10)
+        .attr('x', 0)
+        .attr('y', 0)
         .style('fill', 'white')
 };
