@@ -37,8 +37,6 @@ const appendTrajectories = (selection, data) => {
     })
 };
 
-
-
 const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
     const xPadding = 10;
     const yPadding = 10;
@@ -48,17 +46,19 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
           .attr('class', 'trajectory')
           .style('transform', `translate(${x}px, ${y}px)`);
 
+
+    const lGroup  = tGroup
+          .append('g')
+          .attr('class', 'line')
+          .style('transform', `rotate(${angle}deg)`);
+
     // start cap
-    tGroup
+    lGroup
         .append('circle')
         .attr('r', 4)
         .attr('cx', xPadding)
         .attr('cy', yPadding)
         .style('fill', 'white')
-
-    const lGroup  = tGroup
-          .append('g')
-          .style('transform', `rotate(${angle}deg)`);
 
     // line
     lGroup
