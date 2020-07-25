@@ -12,11 +12,25 @@ window.onload = () => {
         const names = Object.keys(data);
         const states = names.map((n) => {
             const state = data[n];
-            state.angle = 0;
+            state.angle = 50;
+            state.label = n;
             return state;
         });
-
         appendTrajectories(svg, states);
+
+        const [pScale, nScale] = angleScales([50, 0, 100]);
+
+        d3.interval(() => {
+            const updatedStates = states.map(m => {
+                const angle = Math.random() * ((m.angle + 10) - (m.angle - 10)) + (m.angle - 10);
+                return {
+                    ...m,
+                    angle: angle > 50 ? pScale(angle) : nScale(angle)
+                };
+            });
+
+            updateTrajectories(svg, updatedStates);
+        }, 1000);
     });
     
 };
@@ -38,6 +52,12 @@ const angleScales = (data) => {
     return [anglePositiveScale, angleNegativeScale];
 };
 
+const updateTrajectories = (selection, data) => {
+    data.forEach(d => {
+        updateTrajectory(selection, d.label, d.angle);
+    });
+};
+
 const appendTrajectories = (selection, data) => {
     const trajectories = selection
           .selectAll('.trajectory')
@@ -51,7 +71,7 @@ const appendTrajectories = (selection, data) => {
 
 const updateTrajectory = (selection, label, angle) => {
     selection
-        .select(`#${label}`)
+        .select(`#${label.replace(/ /g,'')}`)
         .select('.line')
         .transition()
         .duration(1000)
@@ -66,7 +86,7 @@ const appendTrajectory = (selection, data, width = 60) => {
 
     const tGroup = selection
           .append('g')
-          .attr('id', label)
+          .attr('id', label.replace(/ /g,''))
           .attr('class', 'trajectory')
           .style('transform', `translate(${x}px, ${y}px)`);
 
@@ -75,7 +95,7 @@ const appendTrajectory = (selection, data, width = 60) => {
           .append('g')
           .attr('class', 'line')
           .style('transform-origin', `${xPadding}px ${yPadding}px`)
-          .style('transform', `rotate(${angle}deg)`);
+          .style('transform', `rotate(0deg)`);
 
     // start cap
     lGroup
