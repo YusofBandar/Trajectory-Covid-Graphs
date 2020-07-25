@@ -26,6 +26,23 @@ window.onload = () => {
     appendTrajectories(svg, data);
 }
 
+const angleScales = (data) => {
+    const min = data[d3.minIndex(data,(d) => d - data[0])];
+    const max = data[d3.maxIndex(data,(d) => d - data[0])];
+
+    // scale for when trajectory is positive
+    const anglePositiveScale = d3.scaleLinear()
+                                 .domain([data[0], max])
+                                 .range([0, -90]);
+
+    // scale for when trajectory is negative
+    const angleNegativeScale = d3.scaleLinear()
+                                 .domain([data[0], min])
+                                 .range([0, 90]);
+
+    return [anglePositiveScale, angleNegativeScale];
+};
+
 const appendTrajectories = (selection, data) => {
     const trajectories = selection
           .selectAll('.trajectory')
