@@ -1,25 +1,6 @@
-const data = [
-    {
-        label: 'Washington',
-        displayName: 'Wash.',
-        angle: 0,
-        x: 20,
-        y: 20
-    },
-    {
-        label: 'Idaho',
-        displayName: 'Idaho',
-        angle: 0,
-        x: 120,
-        y: 20
-    }
-];
-
-const seriesData = [100, 80, 90, 110, 130, 150, 130, 200, 30, 50, 70];
-
 window.onload = () => {
-    const width = 1000;
-    const height = 500;
+    const width = 1090;
+    const height = 900;
 
     const svg = d3.select('body')
                   .append('svg')
@@ -27,20 +8,18 @@ window.onload = () => {
                   .attr('height', height)
                   .style('background', '#728ca2');
 
-    appendTrajectories(svg, data);
+    d3.json('./states.json').then((data) => {
+        const names = Object.keys(data);
+        const states = names.map((n) => {
+            const state = data[n];
+            state.angle = 0;
+            return state;
+        });
 
-    const [positiveScale, negativeScale] = angleScales(seriesData);
-
-    let i = 0;
-    const t = d3.interval(() => {
-        i += 1;
-
-        const angle = seriesData[i] > seriesData[0] ? positiveScale(seriesData[i]) : negativeScale(seriesData[i]);
-        updateTrajectory(svg, 'Idaho', angle);
-
-        i === seriesData.length - 1 && t.stop();
-    }, 1000);
-}
+        appendTrajectories(svg, states);
+    });
+    
+};
 
 const angleScales = (data) => {
     const min = data[d3.minIndex(data,(d) => d - data[0])];
@@ -67,9 +46,7 @@ const appendTrajectories = (selection, data) => {
 
     trajectories.each((d) => {
         appendTrajectory(selection, d);
-    })
-
-    updateTrajectory(selection, 'Idaho', 80);
+    });
 };
 
 const updateTrajectory = (selection, label, angle) => {
