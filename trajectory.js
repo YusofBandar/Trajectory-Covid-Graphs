@@ -1,12 +1,14 @@
 const data = [
     {
-        label: 'Wash.',
+        label: 'Washington',
+        displayName: 'Wash.',
         angle: 0,
         x: 20,
         y: 20
     },
     {
         label: 'Idaho',
+        displayName: 'Idaho',
         angle: 0,
         x: 120,
         y: 20
@@ -64,7 +66,7 @@ const appendTrajectories = (selection, data) => {
           .enter()
 
     trajectories.each((d) => {
-        appendTrajectory(selection, d.label, d.angle, d.x, d.y);
+        appendTrajectory(selection, d);
     })
 
     updateTrajectory(selection, 'Idaho', 80);
@@ -80,7 +82,8 @@ const updateTrajectory = (selection, label, angle) => {
         .style('transform', `rotate(${angle}deg)`);
 };
 
-const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
+const appendTrajectory = (selection, data, width = 60) => {
+    const { label, displayName, angle, x, y } = data;
     const xPadding = 10;
     const yPadding = 10;
 
@@ -126,7 +129,7 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
     //label
     tGroup
         .append('text')
-        .text(label)
+        .text(displayName)
         .attr('x', 0)
         .attr('y', 0)
         .style('fill', 'white');
