@@ -35,6 +35,18 @@ const appendTrajectories = (selection, data) => {
     trajectories.each((d) => {
         appendTrajectory(selection, d.label, d.angle, d.x, d.y);
     })
+
+    updateTrajectory(selection, 'Idaho', 80);
+};
+
+const updateTrajectory = (selection, label, angle) => {
+    selection
+        .select(`#${label}`)
+        .select('.line')
+        .transition()
+        .duration(1000)
+        .ease(d3.easeBack)
+        .style('transform', `rotate(${angle}deg)`);
 };
 
 const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
@@ -43,6 +55,7 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
 
     const tGroup = selection
           .append('g')
+          .attr('id', label)
           .attr('class', 'trajectory')
           .style('transform', `translate(${x}px, ${y}px)`);
 
@@ -50,6 +63,7 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
     const lGroup  = tGroup
           .append('g')
           .attr('class', 'line')
+          .style('transform-origin', `${xPadding}px ${yPadding}px`)
           .style('transform', `rotate(${angle}deg)`);
 
     // start cap
@@ -58,14 +72,14 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
         .attr('r', 4)
         .attr('cx', xPadding)
         .attr('cy', yPadding)
-        .style('fill', 'white')
+        .style('fill', 'white');
 
     // line
     lGroup
         .append('path')
         .attr('d', `M ${xPadding} ${yPadding} l ${width} 0`)
         .style('stroke', 'white')
-        .style('stroke-width', '2px')
+        .style('stroke-width', '2px');
 
     // end cap
     lGroup
@@ -84,5 +98,5 @@ const appendTrajectory = (selection, label, angle, x, y, width = 60) => {
         .text(label)
         .attr('x', 0)
         .attr('y', 0)
-        .style('fill', 'white')
+        .style('fill', 'white');
 };
