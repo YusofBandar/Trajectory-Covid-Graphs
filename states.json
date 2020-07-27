@@ -39,7 +39,7 @@
         "x": 300,
         "y": 300
     },
-    "Minnasota": {
+    "Minnesota": {
         "displayName": "Minn.",
         "x": 400,
         "y": 300
@@ -49,7 +49,7 @@
         "x": 500,
         "y": 300
     },
-    "Michagon": {
+    "Michigan": {
         "displayName": "Mich",
         "x": 600,
         "y": 300
@@ -99,7 +99,7 @@
         "x": 500,
         "y": 400
     },
-    "Indinana": {
+    "Indiana": {
         "displayName": "Ind.",
         "x": 600,
         "y": 400
@@ -144,7 +144,7 @@
         "x": 300,
         "y": 500
     },
-    "Montannah": {
+    "Missouri": {
         "displayName": "Mo",
         "x": 400,
         "y": 500
@@ -159,7 +159,7 @@
         "x": 600,
         "y": 500
     },
-    "Washington DC": {
+    "District of Columbia": {
         "displayName": "D.C",
         "x": 700,
         "y": 500
