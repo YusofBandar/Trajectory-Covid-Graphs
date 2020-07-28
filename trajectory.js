@@ -8,45 +8,147 @@ window.onload = () => {
                   .attr('height', height)
                   .style('background', '#728ca2');
 
-    d3.json('./states.json').then((data) => {
-        const names = Object.keys(data);
-        const states = names.map((n) => {
-            const state = data[n];
-            state.angle = 50;
-            state.label = n;
-            return state;
-        });
-        appendTrajectories(svg, states);
+    d3.csv('https://covidtracking.com/api/v1/states/daily.csv').then(data => {
+        let states = d3.group(data, d => d.state);
+        const [pScale, nScale] = angleScales(states);
 
-        const [pScale, nScale] = angleScales([50, 0, 100]);
+        console.log(states);
 
-        d3.interval(() => {
-            const updatedStates = states.map(m => {
-                const angle = Math.random() * ((m.angle + 10) - (m.angle - 10)) + (m.angle - 10);
-                return {
-                    ...m,
-                    angle: angle > 50 ? pScale(angle) : nScale(angle)
-                };
+        d3.json('./states.json').then(metaStateData => {
+            let stateTrajectories = [];
+            getStates(states, 0).map(d => {
+                d.state = abbrState(d.state, 'name');
+                if(d.state){
+                    const metaData = metaStateData[d.state]
+                    stateTrajectories.push({ ...d, ...metaData, label: d.state });
+                }
             });
+            appendTrajectories(svg, stateTrajectories);
 
-            updateTrajectories(svg, updatedStates);
-        }, 1000);
+
+            let index = 1;
+            d3.interval(() => {
+                let stateTrajectories = [];
+                getStates(states, index).map(state => {
+                    if(state){
+                        if(state.state = abbrState(state.state, 'name')) {
+                            const metaData = metaStateData[state.state]
+                            const diff = state.positiveIncrease;
+
+                            let angle = diff > 0 ? pScale(diff) : nScale(Math.abs(diff));
+                            angle = Math.min(Math.max(angle, -90), 90);
+
+                            stateTrajectories.push({ ...state, ...metaData, label: state.state, angle });
+                        }
+                    }
+                });
+                updateTrajectories(svg, stateTrajectories);
+                index += 1;
+
+            }, 500);
+        });
     });
-    
+};
+const abbrState = (input, to) => {
+
+    let states = [
+        ['Arizona', 'AZ'],
+        ['Alabama', 'AL'],
+        ['Alaska', 'AK'],
+        ['Arkansas', 'AR'],
+        ['California', 'CA'],
+        ['Colorado', 'CO'],
+        ['Connecticut', 'CT'],
+        ['Delaware', 'DE'],
+        ['District of Columbia', 'DC'],
+        ['Florida', 'FL'],
+        ['Georgia', 'GA'],
+        ['Hawaii', 'HI'],
+        ['Idaho', 'ID'],
+        ['Illinois', 'IL'],
+        ['Indiana', 'IN'],
+        ['Iowa', 'IA'],
+        ['Kansas', 'KS'],
+        ['Kentucky', 'KY'],
+        ['Louisiana', 'LA'],
+        ['Maine', 'ME'],
+        ['Maryland', 'MD'],
+        ['Massachusetts', 'MA'],
+        ['Michigan', 'MI'],
+        ['Minnesota', 'MN'],
+        ['Mississippi', 'MS'],
+        ['Missouri', 'MO'],
+        ['Montana', 'MT'],
+        ['Nebraska', 'NE'],
+        ['Nevada', 'NV'],
+        ['New Hampshire', 'NH'],
+        ['New Jersey', 'NJ'],
+        ['New Mexico', 'NM'],
+        ['New York', 'NY'],
+        ['North Carolina', 'NC'],
+        ['North Dakota', 'ND'],
+        ['Ohio', 'OH'],
+        ['Oklahoma', 'OK'],
+        ['Oregon', 'OR'],
+        ['Pennsylvania', 'PA'],
+        ['Rhode Island', 'RI'],
+        ['South Carolina', 'SC'],
+        ['South Dakota', 'SD'],
+        ['Tennessee', 'TN'],
+        ['Texas', 'TX'],
+        ['Utah', 'UT'],
+        ['Vermont', 'VT'],
+        ['Virginia', 'VA'],
+        ['Washington', 'WA'],
+        ['West Virginia', 'WV'],
+        ['Wisconsin', 'WI'],
+        ['Wyoming', 'WY'],
+    ];
+
+    if (to == 'abbr'){
+        input = input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        for(i = 0; i < states.length; i++){
+            if(states[i][0] == input){
+                return(states[i][1]);
+            }
+        }
+    } else if (to == 'name'){
+        input = input.toUpperCase();
+        for(i = 0; i < states.length; i++){
+            if(states[i][1] == input){
+                return(states[i][0]);
+            }
+        }
+    }
 };
 
-const angleScales = (data) => {
-    const min = data[d3.minIndex(data,(d) => d - data[0])];
-    const max = data[d3.maxIndex(data,(d) => d - data[0])];
+const getStates = (states, index) => {
+    let stateTrajectories = [];
+    states.forEach(seriesData => {
+        stateTrajectories.push(seriesData[index]);
+    });
+    return stateTrajectories;
+};
+
+const angleScales = (states) => {
+    const min = [];
+    states.forEach((d) => {
+        min.push(d3.min(d, d => d.positiveIncrease));
+    });
+
+    const max = [];
+    states.forEach((d) => {
+        max.push(d3.max(d, d => d.positiveIncrease));
+    });
 
     // scale for when trajectory is positive
     const anglePositiveScale = d3.scaleLinear()
-                                 .domain([data[0], max])
+                                 .domain([0, d3.max(max)])
                                  .range([0, -90]);
 
     // scale for when trajectory is negative
     const angleNegativeScale = d3.scaleLinear()
-                                 .domain([data[0], min])
+                                 .domain([0, d3.min(min)])
                                  .range([0, 90]);
 
     return [anglePositiveScale, angleNegativeScale];
@@ -80,7 +182,7 @@ const updateTrajectory = (selection, label, angle) => {
 };
 
 const appendTrajectory = (selection, data, width = 60) => {
-    const { label, displayName, angle, x, y } = data;
+    const { label, displayName, x, y } = data;
     const xPadding = 10;
     const yPadding = 10;
 
