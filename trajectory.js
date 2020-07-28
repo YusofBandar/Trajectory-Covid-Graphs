@@ -23,6 +23,7 @@ window.onload = () => {
                     stateTrajectories.push({ ...d, ...metaData, label: d.state });
                 }
             });
+            appendTitle(svg, 'The Trajectory of each States Positive Tests');
             appendTrajectories(svg, stateTrajectories);
 
 
@@ -152,6 +153,16 @@ const angleScales = (states) => {
                                  .range([0, 90]);
 
     return [anglePositiveScale, angleNegativeScale];
+};
+
+const appendTitle = (selection, title) => {
+    selection
+        .append('g')
+        .append('text')
+        .attr('x', '50%')
+        .attr('y', '150px')
+        .style('text-anchor', 'middle')
+        .text(title)
 };
 
 const updateTrajectories = (selection, data) => {
