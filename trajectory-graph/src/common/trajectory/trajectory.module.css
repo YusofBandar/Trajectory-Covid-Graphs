@@ -1,0 +1,20 @@
+.trajectory {
+    fill: white;
+}
+
+.label {
+    fill: inherit;
+}
+
+.startCap {
+    fill: inherit;
+}
+
+.line {
+    stroke: white;
+    stroke-width: 2px;
+}
+
+.endCap {
+    fill: inherit;
+}
