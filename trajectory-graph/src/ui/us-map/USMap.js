@@ -12,7 +12,7 @@ import styles from './USMap.module.css';
  */
 function USMap({ title, data }) {
     const [date, setDate] = useState(50);
-    const stateData = data.map(d => {
+    let stateData = data.map(d => {
         const meta = states[d.state];
         return {
             ...d,
@@ -24,6 +24,15 @@ function USMap({ title, data }) {
     const handleDateChange = (event) => {
         setDate(Number(event.target.value));
     };
+
+    stateData = Object.keys(states).map(d => {
+        const state = states[d];
+        return {
+            ...state,
+            angle: 0,
+            label: state.displayName
+        }
+    })
 
     return (
         <div className={ styles.map }>
