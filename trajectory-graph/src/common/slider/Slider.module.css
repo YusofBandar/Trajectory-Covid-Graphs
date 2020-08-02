@@ -36,5 +36,4 @@
 .label {
     position: absolute;
     transform: translateX(-50%);
-    left: 50%;
 }

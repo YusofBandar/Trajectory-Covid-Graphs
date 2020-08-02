@@ -15,7 +15,7 @@ function Slider({ labels, value, onChange, inputProps }) {
             onChange={ onChange }
             type='range' { ...inputProps }/>
           { labels && labels.map(({ label, point }) => (
-              <span style={{ left: `${point}px` }} className={ styles.label }>{ label }</span>
+              <span style={{ left: `${point}%` }} className={ styles.label }>{ label }</span>
           ))}
         </div>
     )
