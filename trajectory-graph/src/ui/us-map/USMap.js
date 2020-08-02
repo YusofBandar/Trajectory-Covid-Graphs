@@ -25,15 +25,6 @@ function USMap({ title, data }) {
         setDate(Number(event.target.value));
     };
 
-    stateData = Object.keys(states).map(d => {
-        const state = states[d];
-        return {
-            ...state,
-            angle: 0,
-            label: state.displayName
-        }
-    })
-
     return (
         <div className={ styles.map }>
           <h1 className={ styles.title }>{ title }</h1>
