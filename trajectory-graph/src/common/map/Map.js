@@ -10,7 +10,7 @@ import styles from './Map.module.css';
  */
 function Map({ data }) {
     return (
-        <svg className={ styles.map } width={1100} height={900}>
+        <svg className={ styles.map }>
           { data && data.map(d => (
               <Trajectory
                 key ={ d.label }
