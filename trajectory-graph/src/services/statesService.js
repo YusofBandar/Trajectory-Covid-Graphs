@@ -6,7 +6,7 @@ import { group } from 'd3-array';
  * @param states
  */
 function groupByState(states){
-    return group(states, d => d.state);
+    return group(states, d => d.label);
 }
 
 /**
@@ -25,8 +25,8 @@ function abbrStateToName(state){
  * Returns min and max increase in cases
  */
 function minMaxIncrease(states){
-    const min = d3.min(states, d => d.positiveIncrease);
-    const max = d3.max(states, d => d.positiveIncrease);
+    const min = d3.min(states, d => d.data.positiveIncrease);
+    const max = d3.max(states, d => d.data.positiveIncrease);
 
     return [min, max];
 }
@@ -43,7 +43,7 @@ function scales(min, max){
                      .domain([0, min])
                      .range([0, 90]);
 
-    return [pScale, nScale];
+    return [nScale, pScale];
 }
 
 export default {
