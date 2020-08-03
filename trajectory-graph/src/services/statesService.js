@@ -22,9 +22,20 @@ function abbrStateToName(state){
     }
 }
 
+/**
+ * Returns min and max increase in cases
+ */
+function minMaxIncrease(states){
+    const min = d3.min(states, d => d.positiveIncrease);
+    const max = d3.max(states, d => d.positiveIncrease);
+
+    return [min, max];
+};
+
 export default {
     groupByState,
-    abbrStateToName
+    abbrStateToName,
+    minMaxIncrease
 }
 
 const stateNames = [
