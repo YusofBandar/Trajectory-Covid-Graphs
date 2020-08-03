@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import { group } from 'd3-array';
 
-
 /**
  * Groups data by state
  * @param states
@@ -30,12 +29,28 @@ function minMaxIncrease(states){
     const max = d3.max(states, d => d.positiveIncrease);
 
     return [min, max];
-};
+}
+
+/**
+ * Return positive and negative scales
+ */
+function scales(min, max){
+    const pScale = d3.scaleLinear()
+                     .domain([0, max])
+                     .range([0, -90]);
+
+    const nScale = d3.scaleLinear()
+                     .domain([0, min])
+                     .range([0, 90]);
+
+    return [pScale, nScale];
+}
 
 export default {
     groupByState,
     abbrStateToName,
-    minMaxIncrease
+    minMaxIncrease,
+    scales
 }
 
 const stateNames = [
