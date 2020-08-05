@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react';
+import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 import StatesService from '../../services/statesService';
 import states from './states'
@@ -11,12 +12,32 @@ import Slider from '../../common/slider/Slider';
 
 import styles from './USMap.module.css';
 
+const useTimer = (callback, interval, inital) => {
+    const timer = useRef();
+
+    const [play, setPlay] = useState(inital);
+    useEffect(() => {
+        if(play){
+            typeof timer.current === 'object' && timer.current.stop();
+            timer.current = d3.interval(callback, interval);
+        }else{
+            typeof timer.current === 'object' && timer.current.stop();
+        }
+    }, [timer, callback, interval, play]);
+
+    return [play, setPlay];
+};
+
 /**
  * USMap
  */
 function USMap({ title, data }) {
-    const [play, setPlay] = useState(false);
-    const [date, setDate] = useState(100);
+    const [date, setDate] = useState(0);
+
+    const [play, setPlay] = useTimer(() => {
+        setDate(date => date + 1);
+    }, 1000, false);
+
     const [stateData ] = useState(() => {
         const stateData = data
               .filter(d => StatesService.abbrStateToName(d.state))
@@ -38,8 +59,6 @@ function USMap({ title, data }) {
 
     const [nScale, pScale] = stateData.scales;
 
-
-
     const currentPoint = [];
     getStates(stateData.groups, date).forEach(state => {
         if(state){
@@ -50,7 +69,6 @@ function USMap({ title, data }) {
             currentPoint.push({ ...state, angle });
         }
     })
-
 
     const handleDateChange = (event) => {
         setDate(Number(event.target.value));
