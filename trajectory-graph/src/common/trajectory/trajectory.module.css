@@ -6,6 +6,10 @@
     fill: inherit;
 }
 
+.arrow {
+    transition: all 1s;
+}
+
 .startCap {
     fill: inherit;
 }

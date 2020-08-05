@@ -10,7 +10,7 @@ function Trajectory({ label, x, y, angle, width }) {
     return (
         <g className={ styles.trajectory } style={{ transform: `translate(${ x }px, ${ y }px)` }}>
           <text className={ styles.label } x={0} y={0}>{ label }</text>
-          <g style={{ transformOrigin: `${10}px ${10}px`, transform: `rotate(${angle}deg)` }}>
+          <g className={ styles.arrow } style={{ transformOrigin: `${10}px ${10}px`, transform: `rotate(${angle}deg)` }}>
             <circle className={ styles.startCap } r={4} cx={10} cy={10}/>
             <path className={ styles.line } d={`M 10 10 l ${ width } 0`}/>
             <polygon className={ styles.endCap } points={
