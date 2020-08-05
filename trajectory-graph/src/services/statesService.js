@@ -46,11 +46,25 @@ function scales(min, max){
     return [nScale, pScale];
 }
 
+/**
+ * Returns data array ordered by date in ascending order
+ */
+function orderByDate(data, accessor){
+    accessor = accessor || (({ data }) => ( new Date(
+        data.date.toString().slice(0, 4),
+        data.date.toString().slice(4, 6),
+        data.date.toString().slice(6)
+    )));
+
+    return data.sort((a, b) => accessor(a) - accessor(b));
+}
+
 export default {
     groupByState,
     abbrStateToName,
     minMaxIncrease,
-    scales
+    scales,
+    orderByDate
 }
 
 const stateNames = [
