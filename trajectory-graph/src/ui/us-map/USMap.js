@@ -68,6 +68,8 @@ function USMap({ title, data }) {
 
     const [nScale, pScale] = stateData.scales;
 
+    const dataLength = stateData.groups.values().next().value.length;
+
     const currentPoint = [];
     getStates(stateData.groups, date).forEach(state => {
         if(state){
@@ -93,7 +95,7 @@ function USMap({ title, data }) {
           <Map data={ currentPoint }/>
           <div className={ styles.slider }>
             <img className={ styles.play } onClick={ handlePlayClick } src={ play ? Pause : Play } alt='play'/>
-            <Slider value={ date } onChange={ handleDateChange }/>
+            <Slider value={ date } onChange={ handleDateChange } inputProps={{min: 0, max: dataLength - 1}}/>
           </div>
         </div>
     );
