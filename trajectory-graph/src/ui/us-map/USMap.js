@@ -34,10 +34,6 @@ const useTimer = (callback, interval, inital) => {
 function USMap({ title, data }) {
     const [date, setDate] = useState(0);
 
-    const [play, setPlay] = useTimer(() => {
-        setDate(date => date + 1);
-    }, 1000, false);
-
     const [stateData ] = useState(() => {
         const stateData = data
               .filter(d => StatesService.abbrStateToName(d.state))
@@ -70,15 +66,18 @@ function USMap({ title, data }) {
 
     const dataLength = stateData.groups.values().next().value.length;
 
+    const [play, setPlay] = useTimer(() => {
+        setDate(date => date < dataLength - 1 ? date + 1 : date);
+    }, 500, false);
+
+
     const currentPoint = [];
     getStates(stateData.groups, date).forEach(state => {
-        if(state){
-            const diff = state.data.positiveIncrease;
-            let angle = diff < 0 ? nScale(diff) : pScale(diff);
-            angle = Math.min(Math.max(angle, -90), 90);
+        const diff = state.data.positiveIncrease;
+        let angle = diff < 0 ? nScale(diff*2) : pScale(diff*2);
+        angle = Math.min(Math.max(angle, -90), 90);
 
-            currentPoint.push({ ...state, angle });
-        }
+        currentPoint.push({ ...state, angle });
     })
 
     const handleDateChange = (event) => {
@@ -100,7 +99,7 @@ function USMap({ title, data }) {
           <Map data={ currentPoint }/>
           <div className={ styles.slider }>
             <img className={ styles.play } onClick={ handlePlayClick } src={ play ? Pause : Play } alt='play'/>
-            <Slider value={ date } onChange={ handleDateChange } labels={ labels } inputProps={{min: 0, max: dataLength - 1}}/>
+            <Slider value={ date } onChange={ handleDateChange } labels={ labels } inputProps={{min: 0, max: dataLength - 5}}/>
           </div>
         </div>
     );
