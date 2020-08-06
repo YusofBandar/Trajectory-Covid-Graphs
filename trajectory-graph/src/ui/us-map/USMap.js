@@ -53,9 +53,14 @@ function USMap({ title, data }) {
         const increaseExtents = StatesService.minMaxIncrease(stateData);
         const scales = StatesService.scales(increaseExtents[0], increaseExtents[1]);
         const groups = StatesService.groupByState(stateData);
+        const maxLen = getMaxDataLength(groups);
 
         for(const state of groups.keys()){
-            groups.set(state, StatesService.orderByDate(groups.get(state)));
+            let orderedData = StatesService.orderByDate(groups.get(state));
+            const len = orderedData.length;
+            orderedData = StatesService.startPadArray(orderedData, orderedData[0], maxLen - len);
+
+            groups.set(state, orderedData);
         }
 
         return { groups, scales };
@@ -94,6 +99,14 @@ function USMap({ title, data }) {
     );
 };
 
+function getMaxDataLength(map) {
+    let len = 0;
+    for(const key of map.keys()){
+        len = Math.max(map.get(key).length, len);
+    }
+
+    return len;
+};
 
 function getStates (states, index) {
     let stateTrajectories = [];
