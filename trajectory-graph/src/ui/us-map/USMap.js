@@ -47,7 +47,7 @@ function USMap({ title, data }) {
                   return {
                       ...meta,
                       data: { ...d },
-                      label
+                      label: meta.displayName
                   }
               });
         const increaseExtents = StatesService.minMaxIncrease(stateData);
