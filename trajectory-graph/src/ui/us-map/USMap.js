@@ -89,17 +89,23 @@ function USMap({ title, data }) {
         setPlay(play => !play);
     };
 
+    const labels = StatesService.distributedMonths('Mar', dataLength).map((l, i) => ({
+        label: l,
+        point: i * 25
+    }));
+
     return (
         <div className={ styles.map }>
           <h1 className={ styles.title }>{ title }</h1>
           <Map data={ currentPoint }/>
           <div className={ styles.slider }>
             <img className={ styles.play } onClick={ handlePlayClick } src={ play ? Pause : Play } alt='play'/>
-            <Slider value={ date } onChange={ handleDateChange } inputProps={{min: 0, max: dataLength - 1}}/>
+            <Slider value={ date } onChange={ handleDateChange } labels={ labels } inputProps={{min: 0, max: dataLength - 1}}/>
           </div>
         </div>
     );
 };
+
 
 function getMaxDataLength(map) {
     let len = 0;
