@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+import styles from './App.module.css'
+
 import USMap from './ui/us-map/USMap';
 
 function App() {
     const [isLoading, response] = useFetch('https://covidtracking.com/api/v1/states/daily.json');
     return (
-        <div className="App">
+        <div className={ styles.app }>
           { !isLoading && <USMap title='US Data' data={ response }/> }
         </div>
     );
