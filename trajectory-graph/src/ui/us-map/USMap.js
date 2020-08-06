@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 import StatesService from '../../services/statesService';
@@ -53,6 +53,10 @@ function USMap({ title, data }) {
         const increaseExtents = StatesService.minMaxIncrease(stateData);
         const scales = StatesService.scales(increaseExtents[0], increaseExtents[1]);
         const groups = StatesService.groupByState(stateData);
+
+        for(const state of groups.keys()){
+            groups.set(state, StatesService.orderByDate(groups.get(state)));
+        }
 
         return { groups, scales };
     })
