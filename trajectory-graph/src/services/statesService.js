@@ -59,12 +59,21 @@ function orderByDate(data, accessor){
     return data.sort((a, b) => accessor(a) - accessor(b));
 }
 
+/**
+ * Returns unshifted array by specified length.
+ */
+function startPadArray (array, value, length){
+    const padding = new Array(length).fill().map(() => value);
+    return [...padding, ...array];
+}
+
 export default {
     groupByState,
     abbrStateToName,
     minMaxIncrease,
     scales,
-    orderByDate
+    orderByDate,
+    startPadArray
 }
 
 const stateNames = [
