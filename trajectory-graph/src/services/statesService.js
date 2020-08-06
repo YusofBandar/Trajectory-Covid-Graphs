@@ -67,13 +67,48 @@ function startPadArray (array, value, length){
     return [...padding, ...array];
 }
 
+/**
+ * Returns array of months evenly distrubuted
+ */
+function distributedMonths(startMonth, days, maxLen = 5){
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const d = Math.ceil(days / 30);
+
+    let startIndex = months.indexOf(startMonth);
+    let labels = [];
+    for(let i =0; i < d; i++){
+        labels.push(months[startIndex % months.length]);
+        startIndex += 1;
+    }
+
+    return distributedCopy(labels, Math.min(labels.length, maxLen));
+}
+
+/**
+ * Retrieve a fixed number of elements from an array, evenly distributed but
+ * always including the first and last elements.
+ *
+ */
+function distributedCopy(items, n) {
+    var elements = [items[0]];
+    var totalItems = items.length - 2;
+    var interval = Math.floor(totalItems/(n - 2));
+    for (var i = 1; i < n - 1; i++) {
+        elements.push(items[i * interval]);
+    }
+    elements.push(items[items.length - 1]);
+    return elements;
+}
+
 export default {
     groupByState,
     abbrStateToName,
     minMaxIncrease,
     scales,
     orderByDate,
-    startPadArray
+    startPadArray,
+    distributedMonths
 }
 
 const stateNames = [
