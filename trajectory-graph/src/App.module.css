@@ -1,3 +1,14 @@
 .app {
+    background: #353535;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+body {
     font-family: 'Raleway', sans-serif;
+    padding: 0;
+    margin: 0;
 }
