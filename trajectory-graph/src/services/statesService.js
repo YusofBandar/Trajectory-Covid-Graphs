@@ -73,7 +73,7 @@ function startPadArray (array, value, length){
 function distributedMonths(startMonth, days, maxLen = 5){
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    const d = Math.ceil(days / 30);
+    const d = Math.floor(days / 30);
 
     let startIndex = months.indexOf(startMonth);
     let labels = [];
