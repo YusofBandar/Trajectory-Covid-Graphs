@@ -32,18 +32,12 @@ function minMaxIncrease(states){
 }
 
 /**
- * Return positive and negative scales
+ * Returns scale mapping 0-max to 0-90
  */
-function scales(min, max){
-    const pScale = d3.scaleLinear()
+function scales(max){
+    return d3.scaleLinear()
                      .domain([0, max])
-                     .range([0, -90]);
-
-    const nScale = d3.scaleLinear()
-                     .domain([0, min])
                      .range([0, 90]);
-
-    return [nScale, pScale];
 }
 
 /**

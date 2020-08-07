@@ -46,8 +46,7 @@ function USMap({ title, data }) {
                       label: meta.displayName
                   }
               });
-        const increaseExtents = StatesService.minMaxIncrease(stateData);
-        const scales = StatesService.scales(increaseExtents[0], increaseExtents[1]);
+        const scale = StatesService.scales(8000);
         const groups = StatesService.groupByState(stateData);
         const maxLen = getMaxDataLength(groups);
 
@@ -59,10 +58,10 @@ function USMap({ title, data }) {
             groups.set(state, orderedData);
         }
 
-        return { groups, scales };
+        return { groups, scale };
     })
 
-    const [nScale, pScale] = stateData.scales;
+    const scale = stateData.scale;
 
     const dataLength = stateData.groups.values().next().value.length;
 
@@ -74,7 +73,8 @@ function USMap({ title, data }) {
     const currentPoint = [];
     getStates(stateData.groups, date).forEach(state => {
         const diff = state.data.positiveIncrease;
-        let angle = diff < 0 ? nScale(diff*2) : pScale(diff*2);
+        let angle = diff < 0 ? scale(Math.abs(diff)) : -1 * scale(diff);
+        state.label === 'N.Y' && console.log(diff, angle);
         angle = Math.min(Math.max(angle, -90), 90);
 
         currentPoint.push({ ...state, angle });
