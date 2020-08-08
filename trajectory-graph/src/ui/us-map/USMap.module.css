@@ -33,3 +33,10 @@
     margin-right: 20px;
     cursor: pointer;
 }
+
+.scale {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    transform: scale(0.5);
+}

@@ -9,6 +9,7 @@ import Pause from '../../img/pause.svg';
 
 import Map from '../../common/map/Map';
 import Slider from '../../common/slider/Slider';
+import Scale from '../../common/scale/Scale';
 
 import styles from './USMap.module.css';
 
@@ -74,7 +75,6 @@ function USMap({ title, data }) {
     getStates(stateData.groups, date).forEach(state => {
         const diff = state.data.positiveIncrease;
         let angle = diff < 0 ? scale(Math.abs(diff)) : -1 * scale(diff);
-        state.label === 'N.Y' && console.log(diff, angle);
         angle = Math.min(Math.max(angle, -90), 90);
 
         currentPoint.push({ ...state, angle });
@@ -100,6 +100,9 @@ function USMap({ title, data }) {
           <div className={ styles.slider }>
             <img className={ styles.play } onClick={ handlePlayClick } src={ play ? Pause : Play } alt='play'/>
             <Slider value={ date } onChange={ handleDateChange } labels={ labels } inputProps={{min: 0, max: dataLength - 5}}/>
+          </div>
+          <div className={ styles.scale }>
+            <Scale min={ 0 } max={ 8000 }/>
           </div>
         </div>
     );
