@@ -32,7 +32,7 @@ const useTimer = (callback, interval, inital) => {
 /**
  * TrajectoriesStates
  */
-function TrajectoriesStates({ title, data }) {
+function TrajectoriesStates({ title, data, dimension, maxValue }) {
     const [date, setDate] = useState(0);
 
     const [stateData ] = useState(() => {
@@ -47,7 +47,7 @@ function TrajectoriesStates({ title, data }) {
                       label: meta.displayName
                   }
               });
-        const scale = StatesService.scales(8000);
+        const scale = StatesService.scales(maxValue);
         const groups = StatesService.groupByState(stateData);
         const maxLen = getMaxDataLength(groups);
 
@@ -73,7 +73,7 @@ function TrajectoriesStates({ title, data }) {
 
     const currentPoint = [];
     getStates(stateData.groups, date).forEach(state => {
-        const diff = state.data.positiveIncrease;
+        const diff = state.data[dimension];
         let angle = diff < 0 ? scale(Math.abs(diff)) : -1 * scale(diff);
         angle = Math.min(Math.max(angle, -90), 90);
 
@@ -102,7 +102,7 @@ function TrajectoriesStates({ title, data }) {
             <Slider value={ date } onChange={ handleDateChange } labels={ labels } inputProps={{min: 0, max: dataLength - 5}}/>
           </div>
           <div className={ styles.scale }>
-            <Scale min={ 0 } max={ 8000 }/>
+            <Scale min={ 0 } max={ maxValue }/>
           </div>
         </div>
     );
@@ -128,7 +128,9 @@ function getStates (states, index) {
 
 TrajectoriesStates.propTypes = {
     title: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.object).isRequired
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    dimension: PropTypes.string.isRequired,
+    maxValue: PropTypes.number.isRequired
 };
 
 

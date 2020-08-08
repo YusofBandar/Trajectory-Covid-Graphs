@@ -8,7 +8,7 @@ function App() {
     const [isLoading, response] = useFetch('https://covidtracking.com/api/v1/states/daily.json');
     return (
         <div className={ styles.app }>
-          { !isLoading && <TrajectoriesStates title='The Trajectory of each States Positive Tests' data={ response }/> }
+          { !isLoading && <TrajectoriesStates title='The Trajectory of each States Positive Tests' data={ response } dimension='positiveInrease'/> }
         </div>
     );
 }
@@ -25,6 +25,7 @@ function useFetch(url, options) {
             const res = await fetch(url, options);
             const json = await res.json();
             setResponse(json);
+            console.log(json);
             setLoading(false);
         }
 
