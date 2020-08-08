@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import StatesService from './services/statesService';
+import states from './states';
 
 import styles from './App.module.css'
 
 import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
 
 function App() {
-    const [isLoading, response] = useFetch('https://covidtracking.com/api/v1/states/daily.json');
+    const [isLoading, response] = useStateData();
+
     return (
         <div className={ styles.app }>
           { !isLoading && <TrajectoriesStates
@@ -43,3 +46,51 @@ function useFetch(url, options) {
 
     return [isLoading, response];
 }
+
+function useStateData(){
+    const [ isFetchLoading, response ] = useFetch('https://covidtracking.com/api/v1/states/daily.json');
+    const [ data, setData ] = useState();
+    const [ isLoading, setIsLoading ] = useState(true);
+
+    useEffect(() => {
+        if(!isFetchLoading){
+            const stateData = response
+                  .filter(d => StatesService.abbrStateToName(d.state))
+                  .map(d => {
+                      const label = StatesService.abbrStateToName(d.state);
+                      const meta = states[label];
+                      return {
+                          ...meta,
+                          data: { ...d },
+                          label: meta.displayName
+                      }
+                  });
+            const groups = StatesService.groupByState(stateData);
+            const maxLen = getMaxDataLength(groups);
+
+            for(const state of groups.keys()){
+                let orderedData = StatesService.orderByDate(groups.get(state));
+                const len = orderedData.length;
+                orderedData = StatesService.startPadArray(orderedData, orderedData[0], maxLen - len);
+
+                groups.set(state, orderedData);
+            }
+
+
+            setData(groups);
+            setIsLoading(false);
+        }
+
+    }, [isFetchLoading, response])
+
+    return [isLoading, data]
+}
+
+function getMaxDataLength(map) {
+    let len = 0;
+    for(const key of map.keys()){
+        len = Math.max(map.get(key).length, len);
+    }
+
+    return len;
+};
