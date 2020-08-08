@@ -1,0 +1,9 @@
+.scale {
+    height: 130px;
+    width: 155px;
+}
+
+.arc {
+    fill: white;
+    transform: translate(0, 125px);
+}
