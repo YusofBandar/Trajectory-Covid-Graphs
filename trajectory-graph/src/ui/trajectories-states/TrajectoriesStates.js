@@ -11,7 +11,7 @@ import Map from '../../common/map/Map';
 import Slider from '../../common/slider/Slider';
 import Scale from '../../common/scale/Scale';
 
-import styles from './USMap.module.css';
+import styles from './TrajectoriesStates.module.css';
 
 const useTimer = (callback, interval, inital) => {
     const timer = useRef();
@@ -30,9 +30,9 @@ const useTimer = (callback, interval, inital) => {
 };
 
 /**
- * USMap
+ * TrajectoriesStates
  */
-function USMap({ title, data }) {
+function TrajectoriesStates({ title, data }) {
     const [date, setDate] = useState(0);
 
     const [stateData ] = useState(() => {
@@ -126,10 +126,10 @@ function getStates (states, index) {
     return stateTrajectories;
 };
 
-USMap.propTypes = {
+TrajectoriesStates.propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 
-export default USMap;
+export default TrajectoriesStates;

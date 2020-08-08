@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './App.module.css'
 
-import USMap from './ui/us-map/USMap';
+import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
 
 function App() {
     const [isLoading, response] = useFetch('https://covidtracking.com/api/v1/states/daily.json');
     return (
         <div className={ styles.app }>
-          { !isLoading && <USMap title='The Trajectory of each States Positive Tests' data={ response }/> }
+          { !isLoading && <TrajectoriesStates title='The Trajectory of each States Positive Tests' data={ response }/> }
         </div>
     );
 }
