@@ -32,12 +32,12 @@ function minMaxIncrease(states){
 }
 
 /**
- * Returns scale mapping 0-max to 0-90
+ * Returns scale mapping from domain to range
  */
-function scales(max){
+function scales(fromMin, fromMax, toMin, toMax){
     return d3.scaleLinear()
-                     .domain([0, max])
-                     .range([0, 90]);
+                     .domain([fromMin, fromMax])
+                     .range([toMin, toMax]);
 }
 
 /**

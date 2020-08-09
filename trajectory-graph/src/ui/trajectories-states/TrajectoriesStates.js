@@ -13,7 +13,7 @@ import styles from './TrajectoriesStates.module.css';
  */
 function TrajectoriesStates({ title, data, dimension, maxValue }) {
     const [date, setDate] = useState(0);
-    const scale = useCallback(StatesService.scales(maxValue), [maxValue]);
+    const scale = useCallback(StatesService.scales(0, maxValue, 0, 90), [maxValue]);
     const dataLength = data.values().next().value.length;
 
     const currentPoint = [];
