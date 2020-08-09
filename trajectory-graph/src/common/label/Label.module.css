@@ -1,0 +1,10 @@
+.label {
+    transition: all 2s;
+}
+
+.title {
+    fill: white;
+    font-weight: 500;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
