@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import StatesService from '../../services/statesService';
 
 import Map from '../../common/map/Map';
+import Trajectory from '../../common/trajectory/Trajectory';
 import Scale from '../../common/scale/Scale';
-import MonthSlider from '../month-slider/MonthSlider';
 
 import styles from './TrajectoriesStates.module.css';
 
@@ -12,46 +12,35 @@ import styles from './TrajectoriesStates.module.css';
  * TrajectoriesStates
  */
 function TrajectoriesStates({ title, data, dimension, maxValue }) {
-    const [date, setDate] = useState(0);
     const scale = useCallback(StatesService.scales(0, maxValue, 0, 90), [maxValue]);
-    const dataLength = data.values().next().value.length;
-
-    const currentPoint = [];
-    getStates(data, date).forEach(state => {
-        const diff = state.data[dimension];
-        let angle = diff < 0 ? scale(Math.abs(diff)) : -1 * scale(diff);
-        angle = Math.min(Math.max(angle, -90), 90);
-
-        currentPoint.push({ ...state, angle });
-    })
-
-    const handleDateChange = (value) => {
-        setDate(value);
-    };
-
-    const labels = StatesService.distributedMonths('Mar', dataLength).map((l, i) => ({
-        label: l,
-        point: i * 25
-    }));
 
     return (
         <div className={ styles.map }>
-          <h1 className={ styles.title }>{ title }</h1>
-          <Map data={ currentPoint }/>
-          <MonthSlider value={ date } length={ dataLength - 1 } labels={ labels } onChange={ handleDateChange }/>
+          <Map title={ title } data={ data }>
+            {(currentPoints) => {
+                const trajectories = [];
+                currentPoints.forEach(state => {
+                    const diff = state.data[dimension];
+                    let angle = diff < 0 ? scale(Math.abs(diff)) : -1 * scale(diff);
+                    angle = Math.min(Math.max(angle, -90), 90);
+
+                    trajectories.push(
+                        <Trajectory
+                          key={ state.displayName }
+                          label={ state.displayName }
+                          x={ state.x }
+                          y={ state.y }
+                          angle={ angle }/>);
+                });
+
+                return trajectories;
+            }}
+          </Map>
           <div className={ styles.scale }>
             <Scale min={ 0 } max={ maxValue }/>
           </div>
         </div>
     );
-};
-
-function getStates (states, index) {
-    let stateTrajectories = [];
-    states.forEach(seriesData => {
-        stateTrajectories.push(seriesData[index]);
-    });
-    return stateTrajectories;
 };
 
 TrajectoriesStates.propTypes = {
