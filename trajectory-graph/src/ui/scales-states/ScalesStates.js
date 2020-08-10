@@ -24,7 +24,6 @@ function ScalesStates({ title, data, dimension }) {
     const currentPoint = [];
     getStates(data, date).forEach(state => {
         const value = state.data[dimension];
-        state.data.state === 'NY' && console.log(value, scale(value));
         currentPoint.push({ ...state, scale: scale(value) });
     })
 
