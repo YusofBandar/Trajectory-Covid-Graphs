@@ -5,6 +5,7 @@ import states from './states';
 import styles from './App.module.css'
 
 import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
+import ScalesStates from './ui/scales-states/ScalesStates';
 
 function App() {
     const [isLoading, response] = useStateData();
@@ -20,6 +21,11 @@ function App() {
                             title='US States Number of Deaths Trajectories'
                             data={ response }
                             dimension='deathIncrease'
+                            maxValue={ 800 }/> }
+          { !isLoading && <ScalesStates
+                            title='US States Number of Positive Tests'
+                            data={ response }
+                            dimension='positive'
                             maxValue={ 800 }/> }
         </div>
     );
