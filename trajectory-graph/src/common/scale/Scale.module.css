@@ -1,0 +1,26 @@
+.scale {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.points {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.min {
+    font-size: 10px;
+}
+
+.max {
+    font-size: 60px;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
