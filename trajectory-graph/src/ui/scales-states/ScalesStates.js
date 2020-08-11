@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 
 import Map from '../../common/map/Map';
 import Label from '../../common/label/Label';
+import Scale from '../../common/scale/Scale';
 
 import styles from './ScalesStates.module.css';
 
@@ -38,6 +39,9 @@ function ScalesStates({ title, data, dimension }) {
                 return labels;
             }}
           </Map>
+          <div className={ styles.scale }>
+            <Scale min={0} max={maxValue}/>
+          </div>
         </div>
     );
 };
