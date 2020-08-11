@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import IndexContext from '../../indexContext';
 import StatesService from '../../services/statesService';
 
 import MonthSlider from '../../ui/month-slider/MonthSlider';
@@ -10,7 +11,7 @@ import styles from './Map.module.css';
  * Map
  */
 function Map({ title, data, children }) {
-    const [index, setIndex] = useState(0);
+    const { index, setIndex } = useContext(IndexContext);
 
     const dataLength = data.values().next().value.length;
 

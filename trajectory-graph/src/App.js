@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import IndexContext from './indexContext';
 import StatesService from './services/statesService';
 import states from './states';
 
@@ -7,11 +8,14 @@ import styles from './App.module.css'
 import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
 import ScalesStates from './ui/scales-states/ScalesStates';
 
+
 function App() {
     const [isLoading, response] = useStateData();
-    console.log(response)
+    const [index, setIndex] = useState(0);
+
 
     return (
+        <IndexContext.Provider value={{ index, setIndex }}>
         <div className={ styles.app }>
           { !isLoading && <TrajectoriesStates
                             title='US States Positive Tests Trajectories'
@@ -32,10 +36,12 @@ function App() {
                             data={ response }
                             dimension='death'/> }
         </div>
+        </IndexContext.Provider>
     );
 }
 
 export default App;
+
 
 function useFetch(url, options) {
     const [isLoading, setLoading] = useState(true);
