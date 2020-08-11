@@ -2,12 +2,12 @@ import React from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 
-import styles from './Scale.module.css';
+import styles from './AngleScale.module.css';
 
 /**
- * Scale
+ * Angle Scale
  */
-function Scale({ min, max }) {
+function AngleScale({ min, max }) {
     const arc = d3.arc()
                   .innerRadius(98)
                   .outerRadius(100)
@@ -25,9 +25,9 @@ function Scale({ min, max }) {
     );
 };
 
-Scale.propTypes = {
+AngleScale.propTypes = {
     min: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired
 };
 
-export default Scale;
+export default AngleScale;

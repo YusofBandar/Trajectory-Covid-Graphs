@@ -4,7 +4,7 @@ import StatesService from '../../services/statesService';
 
 import Map from '../../common/map/Map';
 import Trajectory from '../../common/trajectory/Trajectory';
-import Scale from '../../common/scale/Scale';
+import AngleScale from '../../common/angle-scale/AngleScale';
 
 import styles from './TrajectoriesStates.module.css';
 
@@ -37,7 +37,7 @@ function TrajectoriesStates({ title, data, dimension, maxValue }) {
             }}
           </Map>
           <div className={ styles.scale }>
-            <Scale min={ 0 } max={ maxValue }/>
+            <AngleScale min={ 0 } max={ maxValue }/>
           </div>
         </div>
     );
