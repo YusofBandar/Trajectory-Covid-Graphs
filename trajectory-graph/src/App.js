@@ -9,6 +9,7 @@ import ScalesStates from './ui/scales-states/ScalesStates';
 
 function App() {
     const [isLoading, response] = useStateData();
+    console.log(response)
 
     return (
         <div className={ styles.app }>
@@ -25,8 +26,11 @@ function App() {
           { !isLoading && <ScalesStates
                             title='US States Number of Positive Tests'
                             data={ response }
-                            dimension='positive'
-                            maxValue={ 800 }/> }
+                            dimension='positive'/> }
+          { !isLoading && <ScalesStates
+                            title='US States Number of Deaths'
+                            data={ response }
+                            dimension='death'/> }
         </div>
     );
 }
