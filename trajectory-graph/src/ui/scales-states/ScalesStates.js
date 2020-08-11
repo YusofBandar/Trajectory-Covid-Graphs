@@ -60,8 +60,7 @@ function maxDimensionValue(map, dimension){
 ScalesStates.propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
-    dimension: PropTypes.string.isRequired,
-    maxValue: PropTypes.number.isRequired
+    dimension: PropTypes.string.isRequired
 };
 
 
