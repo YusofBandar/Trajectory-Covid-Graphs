@@ -12,11 +12,11 @@ import styles from './MonthSlider.module.css';
 /**
  * MonthSlider
  */
-function MonthSlider({ play, value, length, labels, onClick, onChange }) {
+function MonthSlider({ play, value, length, labels, valueLabel, onClick, onChange }) {
     return (
         <div className={ styles.slider }>
           <img className={ styles.play } onClick={ onClick } src={ play ? Pause : Play } alt='play'/>
-          <Slider value={ value } onChange={ onChange } labels={ labels } inputProps={{min: 0, max: length}}/>
+          <Slider value={ value } valueLabel={ valueLabel } onChange={ onChange } labels={ labels } min={ 0 } max={ length }/>
         </div>
     );
 };
@@ -29,6 +29,7 @@ MonthSlider.propTypes = {
         label: PropTypes.string.isRequired,
         point: PropTypes.number.isRequired
     })),
+    valueLabel: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired
 };

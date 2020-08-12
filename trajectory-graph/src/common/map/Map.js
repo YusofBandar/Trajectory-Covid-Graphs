@@ -29,6 +29,9 @@ function Map({ title, data, children }) {
 
     const dataLength = data.values().next().value.length;
 
+    const currentDate = StatesService.convertToDate(
+        data.values().next().value[index].data.date);
+
     useTimer(() => {
         index < dataLength && setIndex(index => index + 1);
         index >= dataLength && setPlay(false);
@@ -63,6 +66,7 @@ function Map({ title, data, children }) {
           value={ index }
           length={ dataLength - 1 }
           labels={ labels }
+          valueLabel={ currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
           onClick={ handlePlayClick }
           onChange={ handleIndexChange }/>
       </div>

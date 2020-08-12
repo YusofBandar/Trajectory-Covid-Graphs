@@ -41,14 +41,21 @@ function scales(fromMin, fromMax, toMin, toMax){
 }
 
 /**
+ * Converts string date (yyyy/mm/dd) to Date object
+ */
+function convertToDate(date){
+    return  new Date(
+        date.toString().slice(0, 4),
+        date.toString().slice(4, 6),
+        date.toString().slice(6)
+    );
+}
+
+/**
  * Returns data array ordered by date in ascending order
  */
 function orderByDate(data, accessor){
-    accessor = accessor || (({ data }) => ( new Date(
-        data.date.toString().slice(0, 4),
-        data.date.toString().slice(4, 6),
-        data.date.toString().slice(6)
-    )));
+    accessor = accessor || (({ data }) => (convertToDate(data.date)));
 
     return data.sort((a, b) => accessor(a) - accessor(b));
 }
@@ -100,6 +107,7 @@ export default {
     abbrStateToName,
     minMaxIncrease,
     scales,
+    convertToDate,
     orderByDate,
     startPadArray,
     distributedMonths
