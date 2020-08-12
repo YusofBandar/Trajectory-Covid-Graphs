@@ -8,10 +8,9 @@ import MonthSlider from '../../ui/month-slider/MonthSlider';
 
 import styles from './Map.module.css';
 
-const useTimer = (callback, interval, inital) => {
+const useTimer = (callback, interval, play) => {
     const timer = useRef();
 
-    const [play, setPlay] = useState(inital);
     useEffect(() => {
         if(play){
             typeof timer.current === 'object' && timer.current.stop();
@@ -20,22 +19,20 @@ const useTimer = (callback, interval, inital) => {
             typeof timer.current === 'object' && timer.current.stop();
         }
     }, [timer, callback, interval, play]);
-
-    return [play, setPlay];
 };
 
 /**
  * Map
  */
 function Map({ title, data, children }) {
-    const { index, setIndex } = useContext(IndexContext);
+    const { index, setIndex, play, setPlay } = useContext(IndexContext);
 
     const dataLength = data.values().next().value.length;
 
-    const [play, setPlay] = useTimer(() => {
+    useTimer(() => {
         index < dataLength && setIndex(index => index + 1);
         index >= dataLength && setPlay(false);
-    }, 500, false);
+    }, 500, play);
 
     const labels = StatesService.distributedMonths('Mar', dataLength).map((l, i) => ({
         label: l,
@@ -43,12 +40,12 @@ function Map({ title, data, children }) {
     }));
 
     const currentPoints = [];
-    getData(data, index).forEach(point => {
+    getData(data, Math.min(dataLength-1, index)).forEach(point => {
         currentPoints.push(point);
     });
 
-    const handleIndexChange = (value) => {
-        setIndex(value);
+    const handleIndexChange = (event) => {
+        setIndex(Number(event.target.value));
     };
 
     const handlePlayClick = () => {

@@ -12,10 +12,11 @@ import ScalesStates from './ui/scales-states/ScalesStates';
 function App() {
     const [isLoading, response] = useStateData();
     const [index, setIndex] = useState(0);
+    const [play, setPlay] = useState(false);
 
 
     return (
-        <IndexContext.Provider value={{ index, setIndex }}>
+        <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
         <div className={ styles.app }>
           { !isLoading && <TrajectoriesStates
                             title='US States Positive Tests Trajectories'
