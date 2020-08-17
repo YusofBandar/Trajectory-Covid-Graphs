@@ -46,7 +46,7 @@ function scales(fromMin, fromMax, toMin, toMax){
 function convertToDate(date){
     return  new Date(
         date.toString().slice(0, 4),
-        date.toString().slice(4, 6),
+        Number(date.toString().slice(4, 6)) -1,
         date.toString().slice(6)
     );
 }
