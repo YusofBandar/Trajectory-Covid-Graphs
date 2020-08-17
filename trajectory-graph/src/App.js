@@ -3,11 +3,13 @@ import IndexContext from './indexContext';
 import StatesService from './services/statesService';
 import states from './states';
 
+import Twitter from './img/twitter.svg';
+import Github from './img/github.svg';
+
 import styles from './App.module.css'
 
 import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
 import ScalesStates from './ui/scales-states/ScalesStates';
-
 
 function App() {
     const [isLoading, response] = useStateData();
@@ -17,26 +19,39 @@ function App() {
 
     return (
         <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
-        <div className={ styles.app }>
-          { !isLoading && <TrajectoriesStates
-                            title='US States Positive Tests Trajectories'
-                            data={ response }
-                            dimension='positiveIncrease'
-                            maxValue={ 8000 }/> }
-          { !isLoading && <TrajectoriesStates
-                            title='US States Number of Deaths Trajectories'
-                            data={ response }
-                            dimension='deathIncrease'
-                            maxValue={ 800 }/> }
-          { !isLoading && <ScalesStates
-                            title='US States Number of Positive Tests'
-                            data={ response }
-                            dimension='positive'/> }
-          { !isLoading && <ScalesStates
-                            title='US States Number of Deaths'
-                            data={ response }
-                            dimension='death'/> }
-        </div>
+          <div className={ styles.app }>
+            { !isLoading &&
+              <TrajectoriesStates
+                title='US States Positive Tests Trajectories'
+                data={ response }
+                dimension='positiveIncrease'
+                maxValue={ 8000 }/> }
+            { !isLoading &&
+              <TrajectoriesStates
+                title='US States Number of Deaths Trajectories'
+                data={ response }
+                dimension='deathIncrease'
+                maxValue={ 800 }/> }
+            { !isLoading &&
+              <ScalesStates
+                title='US States Number of Positive Tests'
+                data={ response }
+                dimension='positive'/> }
+            { !isLoading &&
+              <ScalesStates
+                title='US States Number of Deaths'
+                data={ response }
+                dimension='death'/> }
+          </div>
+          <footer className={ styles.footer }>
+            <span className={ styles.author }>Yusof Bandar</span>
+            <a href='https://twitter.com/BandarYusof' target='_blank' rel='noopener noreferrer'>
+              <img className={ styles.icon } src={ Twitter } alt='twitter'/>
+            </a>
+            <a href='https://github.com/YusofBandar' target='_blank' rel='noopener noreferrer'>
+              <img className={ styles.icon } src={ Github } alt='github'/>
+            </a>
+          </footer>
         </IndexContext.Provider>
     );
 }
