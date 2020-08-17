@@ -26,11 +26,11 @@ const useTimer = (callback, interval, play) => {
  */
 function Map({ title, data, scale, children }) {
     const { index, setIndex, play, setPlay } = useContext(IndexContext);
-
     const dataLength = data.values().next().value.length;
+    const currentIndex = Math.min(dataLength -1, index);
 
     const currentDate = StatesService.convertToDate(
-        data.values().next().value[index].data.date);
+        data.values().next().value[currentIndex].data.date);
 
     useTimer(() => {
         index < dataLength && setIndex(index => index + 1);
@@ -43,7 +43,7 @@ function Map({ title, data, scale, children }) {
     }));
 
     const currentPoints = [];
-    getData(data, Math.min(dataLength-1, index)).forEach(point => {
+    getData(data, currentIndex).forEach(point => {
         currentPoints.push(point);
     });
 
