@@ -19,6 +19,7 @@
     left: 50%;
     top: 15%;
     text-align: center;
+    color: #e0e0e0;
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
