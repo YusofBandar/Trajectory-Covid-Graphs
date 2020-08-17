@@ -16,7 +16,10 @@ function TrajectoriesStates({ title, data, dimension, maxValue }) {
 
     return (
         <div className={ styles.map }>
-          <Map title={ title } data={ data }>
+          <Map
+            title={ title }
+            data={ data }
+            scale={ <div className={ styles.scale }><AngleScale min={ 0 } max={ maxValue }/></div> }>
             {(currentPoints) => {
                 const trajectories = [];
                 currentPoints.forEach(state => {
@@ -28,7 +31,7 @@ function TrajectoriesStates({ title, data, dimension, maxValue }) {
                         <Trajectory
                           key={ state.displayName }
                           label={ state.displayName }
-                          x={ state.x }
+                         x={ state.x }
                           y={ state.y }
                           angle={ angle }/>);
                 });
@@ -37,7 +40,6 @@ function TrajectoriesStates({ title, data, dimension, maxValue }) {
             }}
           </Map>
           <div className={ styles.scale }>
-            <AngleScale min={ 0 } max={ maxValue }/>
           </div>
         </div>
     );

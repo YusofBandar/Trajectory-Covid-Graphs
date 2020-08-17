@@ -14,8 +14,5 @@
 }
 
 .scale {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
     transform: scale(0.5);
 }

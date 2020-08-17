@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 import IndexContext from '../../indexContext';
@@ -24,7 +24,7 @@ const useTimer = (callback, interval, play) => {
 /**
  * Map
  */
-function Map({ title, data, children }) {
+function Map({ title, data, scale, children }) {
     const { index, setIndex, play, setPlay } = useContext(IndexContext);
 
     const dataLength = data.values().next().value.length;
@@ -61,14 +61,17 @@ function Map({ title, data, children }) {
         <svg className={ styles.map }>
           { children(currentPoints) }
         </svg>
-        <MonthSlider
-          play={ play }
-          value={ index }
-          length={ dataLength - 1 }
-          labels={ labels }
-          valueLabel={ currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
-          onClick={ handlePlayClick }
-          onChange={ handleIndexChange }/>
+        <div className={ styles.controls }>
+          <MonthSlider
+            play={ play }
+            value={ index }
+            length={ dataLength - 1 }
+            labels={ labels }
+            valueLabel={ currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
+            onClick={ handlePlayClick }
+            onChange={ handleIndexChange }/>
+          { scale }
+        </div>
       </div>
     );
 };

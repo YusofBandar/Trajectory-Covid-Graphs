@@ -21,7 +21,7 @@ function ScalesStates({ title, data, dimension }) {
 
     return (
         <div className={ styles.map }>
-          <Map title={ title } data={ data }>
+          <Map title={ title } data={ data } scale={ <Scale min={0} max={ maxValue }/>}>
             { (currentPoints) => {
                 const labels = [];
                 currentPoints.forEach(state => {
@@ -39,9 +39,6 @@ function ScalesStates({ title, data, dimension }) {
                 return labels;
             }}
           </Map>
-          <div className={ styles.scale }>
-            <Scale min={0} max={maxValue}/>
-          </div>
         </div>
     );
 };
