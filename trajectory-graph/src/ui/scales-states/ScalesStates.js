@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
+import statesService from '../../services/statesService';
 
 import Map from '../../common/map/Map';
 import Label from '../../common/label/Label';
@@ -12,7 +13,7 @@ import styles from './ScalesStates.module.css';
  * ScalesStates
  */
 function ScalesStates({ title, data, dimension }) {
-    const maxValue = maxDimensionValue(data, dimension);
+    const maxValue = statesService.maxDimensionValue(data, dimension);
     const scale = useCallback(
         d3.scaleLinear()
           .domain([0, maxValue])
@@ -42,17 +43,6 @@ function ScalesStates({ title, data, dimension }) {
         </div>
     );
 };
-
-function maxDimensionValue(map, dimension){
-    let max = 0;
-    for(const key of map.keys()){
-        for(const value of map.get(key)){
-            max = Math.max(max, value.data[dimension]);
-        }
-    }
-
-    return max;
-}
 
 ScalesStates.propTypes = {
     title: PropTypes.string.isRequired,

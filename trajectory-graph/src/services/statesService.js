@@ -69,6 +69,19 @@ function startPadArray (array, value, length){
 }
 
 /**
+ * Returns max value in map
+ */
+function maxDimensionValue(map, dimension){
+    let max = 0;
+    for(const key of map.keys()){
+        for(const value of map.get(key)){
+            max = Math.max(max, value.data[dimension]);
+        }
+    }
+    return max;
+}
+
+/**
  * Returns array of months evenly distrubuted
  */
 function distributedMonths(startMonth, days, maxLen = 5){
@@ -110,6 +123,7 @@ export default {
     convertToDate,
     orderByDate,
     startPadArray,
+    maxDimensionValue,
     distributedMonths
 }
 
