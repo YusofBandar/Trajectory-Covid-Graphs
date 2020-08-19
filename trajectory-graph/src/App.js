@@ -10,6 +10,7 @@ import styles from './App.module.css'
 
 import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
 import ScalesStates from './ui/scales-states/ScalesStates';
+import CircleStates from './ui/circle-states/CircleStates';
 
 function App() {
     const [isLoading, response] = useStateData();
@@ -25,6 +26,12 @@ function App() {
     return (
         <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
           <div className={ styles.app }>
+            { !isLoading &&
+              <CircleStates
+                title='US States Positive Tests Trajectories'
+                data={ response }
+                parentDimension='positive'
+                childDimension='death'/> }
             { !isLoading &&
               <TrajectoriesStates
                 title='US States Positive Tests Trajectories'
