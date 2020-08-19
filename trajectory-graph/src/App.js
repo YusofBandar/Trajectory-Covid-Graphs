@@ -19,7 +19,6 @@ function App() {
 
     useEffect(() => {
         if(!isLoading){
-            
             setIndex(response.values().next().value.length);
         }
     }, [isLoading, response])
