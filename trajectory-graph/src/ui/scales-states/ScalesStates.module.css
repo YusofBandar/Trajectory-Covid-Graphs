@@ -9,9 +9,3 @@
 .map:not(:last-child) {
     border-bottom: solid 2px white;
 }
-
-.scale {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-}
