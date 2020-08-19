@@ -1,0 +1,18 @@
+.parentCircle {
+    fill: #f7f7f7b5;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    transition: all 1s;
+}
+
+.childCircle {
+    fill: #101010;
+    stroke-width: 2px;
+    stroke: white;
+    transition: all 1s;
+}
+
+.label {
+    fill: white;
+    text-anchor: middle;
+}
