@@ -16,6 +16,11 @@ function App() {
     const [index, setIndex] = useState(0);
     const [play, setPlay] = useState(false);
 
+    useEffect(() => {
+        if(!isLoading){
+            setIndex(response.values().next().value.length);
+        }
+    }, [isLoading, response])
 
     return (
         <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
