@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 import { group } from 'd3-array';
 
 /**
@@ -19,25 +18,6 @@ function abbrStateToName(state){
             return(stateNames[i][0]);
         }
     }
-}
-
-/**
- * Returns min and max increase in cases
- */
-function minMaxIncrease(states){
-    const min = d3.min(states, d => d.data.positiveIncrease);
-    const max = d3.max(states, d => d.data.positiveIncrease);
-
-    return [min, max];
-}
-
-/**
- * Returns scale mapping from domain to range
- */
-function scales(fromMin, fromMax, toMin, toMax){
-    return d3.scaleLinear()
-                     .domain([fromMin, fromMax])
-                     .range([toMin, toMax]);
 }
 
 /**
@@ -118,8 +98,6 @@ function distributedCopy(items, n) {
 export default {
     groupByState,
     abbrStateToName,
-    minMaxIncrease,
-    scales,
     convertToDate,
     orderByDate,
     startPadArray,
