@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cc8f5241.chunk.css",
+    "main.js": "/static/js/main.3e3a2711.chunk.js",
+    "main.js.map": "/static/js/main.3e3a2711.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.17a84603.js",
+    "runtime-main.js.map": "/static/js/runtime-main.17a84603.js.map",
+    "static/js/2.1ef58fdb.chunk.js": "/static/js/2.1ef58fdb.chunk.js",
+    "static/js/2.1ef58fdb.chunk.js.map": "/static/js/2.1ef58fdb.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.fd5506a0ad3c5aea3ca6b3f8cb99712b.js": "/precache-manifest.fd5506a0ad3c5aea3ca6b3f8cb99712b.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.cc8f5241.chunk.css.map": "/static/css/main.cc8f5241.chunk.css.map",
+    "static/js/2.1ef58fdb.chunk.js.LICENSE.txt": "/static/js/2.1ef58fdb.chunk.js.LICENSE.txt",
+    "static/media/github.svg": "/static/media/github.c48d680a.svg",
+    "static/media/pause.svg": "/static/media/pause.40475220.svg",
+    "static/media/play.svg": "/static/media/play.221bbead.svg",
+    "static/media/twitter.svg": "/static/media/twitter.50cf6ea3.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.17a84603.js",
+    "static/js/2.1ef58fdb.chunk.js",
+    "static/css/main.cc8f5241.chunk.css",
+    "static/js/main.3e3a2711.chunk.js"
+  ]
+}
