@@ -1,0 +1,10 @@
+.circle {
+    fill: #f7f7f7b5;
+    stroke: #ffffff;
+    stroke-width: 2px;
+}
+
+.label {
+    fill: white;
+    text-anchor: middle;
+}
