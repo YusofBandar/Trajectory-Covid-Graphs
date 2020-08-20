@@ -92,7 +92,9 @@ function useFetch(url, options) {
 }
 
 function useStateData(){
-    const [ isFetchLoading, response ] = useFetch('https://covidtracking.com/api/v1/states/daily.json');
+    const [ isFetchLoading, response ] = useFetch(
+      !window.location.href.includes('api') ? './daily.json' :
+      'https://covidtracking.com/api/v1/states/daily.json');
     const [ data, setData ] = useState();
     const [ isLoading, setIsLoading ] = useState(true);
 
