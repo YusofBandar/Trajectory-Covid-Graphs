@@ -9,6 +9,8 @@ The [Covid Tracking API](https://covidtracking.com/data/api) is used to retrieve
 
 ## Examples
 
-![US States Positive Tests Trajectories](https://github.com/YusofBandar/Trajectory-Covid-Graphs/blob/master/trajectory-graph/docs/positiveTestTrajectories.gif)
+![US States Positive Tests Trajectories](https://github.com/YusofBandar/Trajectory-Covid-Graphs/blob/master/docs/positiveTestTrajectories.gif)
 
-![US States Number of Deaths Trajectories](https://github.com/YusofBandar/Trajectory-Covid-Graphs/blob/master/trajectory-graph/docs/numberDeathsTrajectories.gif)
+![US States Number of Deaths Trajectories](https://github.com/YusofBandar/Trajectory-Covid-Graphs/blob/master/docs/numberDeathsTrajectories.gif)
+
+![US States Number of Positive Cases Compared to the Number of Deaths](https://github.com/YusofBandar/Trajectory-Covid-Graphs/blob/master/docs/numberDeathsCases.gif)

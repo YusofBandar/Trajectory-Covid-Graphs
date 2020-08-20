@@ -50,7 +50,7 @@ function App() {
                 dimension='death'/> }
             { !isLoading &&
               <CircleStates
-                title='US States Number of Postivie Cases Compared to the Number of Deaths'
+                title='US States Number of Positive Cases Compared to the Number of Deaths'
                 data={ response }
                 parentDimension='positive'
                 childDimension='death'/> }
