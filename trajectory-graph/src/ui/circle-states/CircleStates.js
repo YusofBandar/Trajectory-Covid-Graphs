@@ -5,6 +5,7 @@ import statesService from '../../services/statesService';
 
 import Map from '../../common/map/Map';
 import NestedCircles from '../../common/nested-circles/NestedCircles';
+import CircleScale from '../../common/circle-scale/CircleScale'
 
 import styles from './CircleStates.module.css';
 
@@ -21,7 +22,7 @@ function CircleStates({ title, data, parentDimension, childDimension }) {
 
     return (
         <div className={ styles.map }>
-          <Map title={ title } data={ data }>
+          <Map title={ title } data={ data } scale={ <CircleScale min={0} max={maxValue}/> }>
             { (currentPoints) => {
                 const circles = [];
                 currentPoints.forEach(state => {
