@@ -102,7 +102,6 @@ function useStateData(){
       !window.location.href.includes('api') ? './daily.json' :
       'https://covidtracking.com/api/v1/states/daily.json');
 
-    console.log(response);
     const [ data, setData ] = useState();
     const [ isLoading, setIsLoading ] = useState(true);
 
