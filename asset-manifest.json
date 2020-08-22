@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Trajectory-Covid-Graphs/static/css/main.cc8f5241.chunk.css",
-    "main.js": "/Trajectory-Covid-Graphs/static/js/main.f419bd36.chunk.js",
-    "main.js.map": "/Trajectory-Covid-Graphs/static/js/main.f419bd36.chunk.js.map",
+    "main.css": "/Trajectory-Covid-Graphs/static/css/main.d269eea5.chunk.css",
+    "main.js": "/Trajectory-Covid-Graphs/static/js/main.1cd7c63a.chunk.js",
+    "main.js.map": "/Trajectory-Covid-Graphs/static/js/main.1cd7c63a.chunk.js.map",
     "runtime-main.js": "/Trajectory-Covid-Graphs/static/js/runtime-main.ad4387d6.js",
     "runtime-main.js.map": "/Trajectory-Covid-Graphs/static/js/runtime-main.ad4387d6.js.map",
-    "static/js/2.1ef58fdb.chunk.js": "/Trajectory-Covid-Graphs/static/js/2.1ef58fdb.chunk.js",
-    "static/js/2.1ef58fdb.chunk.js.map": "/Trajectory-Covid-Graphs/static/js/2.1ef58fdb.chunk.js.map",
+    "static/js/2.cca89038.chunk.js": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js",
+    "static/js/2.cca89038.chunk.js.map": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js.map",
     "index.html": "/Trajectory-Covid-Graphs/index.html",
-    "precache-manifest.9645d7b220a364ea512b458d53bda490.js": "/Trajectory-Covid-Graphs/precache-manifest.9645d7b220a364ea512b458d53bda490.js",
+    "precache-manifest.9e3df8ffbd6522a6ebb413ce34a07988.js": "/Trajectory-Covid-Graphs/precache-manifest.9e3df8ffbd6522a6ebb413ce34a07988.js",
     "service-worker.js": "/Trajectory-Covid-Graphs/service-worker.js",
-    "static/css/main.cc8f5241.chunk.css.map": "/Trajectory-Covid-Graphs/static/css/main.cc8f5241.chunk.css.map",
-    "static/js/2.1ef58fdb.chunk.js.LICENSE.txt": "/Trajectory-Covid-Graphs/static/js/2.1ef58fdb.chunk.js.LICENSE.txt",
+    "static/css/main.d269eea5.chunk.css.map": "/Trajectory-Covid-Graphs/static/css/main.d269eea5.chunk.css.map",
+    "static/js/2.cca89038.chunk.js.LICENSE.txt": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js.LICENSE.txt",
     "static/media/github.svg": "/Trajectory-Covid-Graphs/static/media/github.c48d680a.svg",
     "static/media/pause.svg": "/Trajectory-Covid-Graphs/static/media/pause.40475220.svg",
     "static/media/play.svg": "/Trajectory-Covid-Graphs/static/media/play.221bbead.svg",
@@ -19,8 +19,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ad4387d6.js",
-    "static/js/2.1ef58fdb.chunk.js",
-    "static/css/main.cc8f5241.chunk.css",
-    "static/js/main.f419bd36.chunk.js"
+    "static/js/2.cca89038.chunk.js",
+    "static/css/main.d269eea5.chunk.css",
+    "static/js/main.1cd7c63a.chunk.js"
   ]
 }
