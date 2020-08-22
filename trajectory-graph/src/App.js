@@ -11,6 +11,7 @@ import styles from './App.module.css'
 import TrajectoriesStates from './ui/trajectories-states/TrajectoriesStates';
 import ScalesStates from './ui/scales-states/ScalesStates';
 import CircleStates from './ui/circle-states/CircleStates';
+import LoadingSpinner from './common/loading-spinner/LoadingSpinner';
 
 function App() {
     const [isLoading, response] = useStateData();
@@ -32,28 +33,33 @@ function App() {
                 data={ response }
                 dimension='positiveIncrease'
                 maxValue={ 8000 }/> }
+            { isLoading && <LoadingSpinner/> }
             { !isLoading &&
               <TrajectoriesStates
                 title='US States Number of Deaths Trajectories'
                 data={ response }
                 dimension='deathIncrease'
                 maxValue={ 800 }/> }
+            { isLoading && <LoadingSpinner/> }
             { !isLoading &&
               <ScalesStates
                 title='US States Number of Positive Cases'
                 data={ response }
                 dimension='positive'/> }
+            { isLoading && <LoadingSpinner/> }
             { !isLoading &&
               <ScalesStates
                 title='US States Number of Deaths'
                 data={ response }
                 dimension='death'/> }
+            { isLoading && <LoadingSpinner/> }
             { !isLoading &&
               <CircleStates
                 title='US States Number of Positive Cases Compared to the Number of Deaths'
                 data={ response }
                 parentDimension='positive'
                 childDimension='death'/> }
+            { isLoading && <LoadingSpinner/> }
           </div>
           <footer className={ styles.footer }>
             <span className={ styles.author }>Yusof Bandar</span>
@@ -95,6 +101,8 @@ function useStateData(){
     const [ isFetchLoading, response ] = useFetch(
       !window.location.href.includes('api') ? './daily.json' :
       'https://covidtracking.com/api/v1/states/daily.json');
+
+    console.log(response);
     const [ data, setData ] = useState();
     const [ isLoading, setIsLoading ] = useState(true);
 
