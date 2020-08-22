@@ -56,23 +56,23 @@ function Map({ title, data, scale, children }) {
     };
 
     return (
-      <div className={ styles.mapWrapper }>
-        <h1 className={ styles.title }>{ title }</h1>
-        <svg className={ styles.map }>
-          { children(currentPoints) }
-        </svg>
-        <div className={ styles.controls }>
-          <MonthSlider
-            play={ play }
-            value={ index }
-            length={ dataLength - 1 }
-            labels={ labels }
-            valueLabel={ currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
-            onClick={ handlePlayClick }
-            onChange={ handleIndexChange }/>
-          { scale }
+        <div className={ styles.mapWrapper }>
+            <h1 className={ styles.title }>{ title }</h1>
+            <svg className={ styles.map }>
+                { children(currentPoints) }
+            </svg>
+            <div className={ styles.controls }>
+                <MonthSlider
+                    play={ play }
+                    value={ index }
+                    length={ dataLength - 1 }
+                    labels={ labels }
+                    valueLabel={ currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
+                    onClick={ handlePlayClick }
+                    onChange={ handleIndexChange }/>
+                { scale }
+            </div>
         </div>
-      </div>
     );
 };
 

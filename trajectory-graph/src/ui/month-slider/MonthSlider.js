@@ -15,8 +15,8 @@ import styles from './MonthSlider.module.css';
 function MonthSlider({ play, value, length, labels, valueLabel, onClick, onChange }) {
     return (
         <div className={ styles.slider }>
-          <img className={ styles.play } onClick={ onClick } src={ play ? Pause : Play } alt='play'/>
-          <Slider value={ value } valueLabel={ valueLabel } onChange={ onChange } labels={ labels } min={ 0 } max={ length }/>
+            <img className={ styles.play } onClick={ onClick } src={ play ? Pause : Play } alt='play'/>
+            <Slider value={ value } valueLabel={ valueLabel } onChange={ onChange } labels={ labels } min={ 0 } max={ length }/>
         </div>
     );
 };

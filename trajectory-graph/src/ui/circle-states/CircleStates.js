@@ -16,32 +16,32 @@ function CircleStates({ title, data, parentDimension, childDimension }) {
     const maxValue = statesService.maxDimensionValue(data, parentDimension);
     const scale = useCallback(
         d3.scaleLinear()
-          .domain([0, maxValue])
-          .range([1, 35])
+        .domain([0, maxValue])
+        .range([1, 35])
     );
 
     return (
         <div className={ styles.map }>
-          <Map title={ title } data={ data } scale={ <CircleScale min={0} max={maxValue}/> }>
-            { (currentPoints) => {
-                const circles = [];
-                currentPoints.forEach(state => {
-                    const parentValue = scale(state.data[parentDimension]);
-                    const childValue = scale(state.data[childDimension]);
-                    circles.push(
-                        <NestedCircles
-                          key={ state.displayName }
-                          label={state.data.state}
-                          parentRadius={parentValue}
-                          childRadius={childValue}
-                          x={state.x}
-                          y={state.y}/>
-                    );
-                })
+            <Map title={ title } data={ data } scale={ <CircleScale min={0} max={maxValue}/> }>
+                { (currentPoints) => {
+                    const circles = [];
+                    currentPoints.forEach(state => {
+                        const parentValue = scale(state.data[parentDimension]);
+                        const childValue = scale(state.data[childDimension]);
+                        circles.push(
+                            <NestedCircles
+                                key={ state.displayName }
+                                label={state.data.state}
+                                parentRadius={parentValue}
+                                childRadius={childValue}
+                                x={state.x}
+                                y={state.y}/>
+                        );
+                    })
 
-                return circles;
-            }}
-          </Map>
+                    return circles;
+                }}
+            </Map>
         </div>
     );
 };

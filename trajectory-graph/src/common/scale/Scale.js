@@ -9,14 +9,14 @@ import styles from './Scale.module.css';
 function Scale({ min, max }) {
     return (
         <div className={ styles.scale }>
-          <div className={ styles.points }>
-            <span className={ styles.min }>A</span>
-            <span className={ styles.max }>A</span>
-          </div>
-          <div className={ styles.labels }>
-            <span>{ min }</span>
-            <span>{ max }</span>
-          </div>
+            <div className={ styles.points }>
+                <span className={ styles.min }>A</span>
+                <span className={ styles.max }>A</span>
+            </div>
+            <div className={ styles.labels }>
+                <span>{ min }</span>
+                <span>{ max }</span>
+            </div>
         </div>
     );
 };

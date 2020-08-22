@@ -9,9 +9,9 @@ import styles from './NestedCircles.module.css';
 function NestedCircles({label, x, y, parentRadius, childRadius}) {
     return (
         <g style={{ transform: `translate(${ x }px, ${ y }px)` }}>
-          <circle className={ styles.parentCircle } r={parentRadius} cx={0} cy={0}/>
-          <circle className={ styles.childCircle } r={childRadius} cx={0} cy={0}/>
-          <text className={ styles.label } x={0} y={parentRadius + 20}>{ label }</text>
+            <circle className={ styles.parentCircle } r={parentRadius} cx={0} cy={0}/>
+            <circle className={ styles.childCircle } r={childRadius} cx={0} cy={0}/>
+            <text className={ styles.label } x={0} y={parentRadius + 20}>{ label }</text>
         </g>
     );
 };

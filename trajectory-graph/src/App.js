@@ -26,50 +26,50 @@ function App() {
 
     return (
         <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
-          <div className={ styles.app }>
-            { !isLoading &&
-              <TrajectoriesStates
-                title='US States Positive Cases Trajectories'
-                data={ response }
-                dimension='positiveIncrease'
-                maxValue={ 8000 }/> }
-            { isLoading && <LoadingSpinner/> }
-            { !isLoading &&
-              <TrajectoriesStates
-                title='US States Number of Deaths Trajectories'
-                data={ response }
-                dimension='deathIncrease'
-                maxValue={ 800 }/> }
-            { isLoading && <LoadingSpinner/> }
-            { !isLoading &&
-              <ScalesStates
-                title='US States Number of Positive Cases'
-                data={ response }
-                dimension='positive'/> }
-            { isLoading && <LoadingSpinner/> }
-            { !isLoading &&
-              <ScalesStates
-                title='US States Number of Deaths'
-                data={ response }
-                dimension='death'/> }
-            { isLoading && <LoadingSpinner/> }
-            { !isLoading &&
-              <CircleStates
-                title='US States Number of Positive Cases Compared to the Number of Deaths'
-                data={ response }
-                parentDimension='positive'
-                childDimension='death'/> }
-            { isLoading && <LoadingSpinner/> }
-          </div>
-          <footer className={ styles.footer }>
-            <span className={ styles.author }>Yusof Bandar</span>
-            <a href='https://twitter.com/BandarYusof' target='_blank' rel='noopener noreferrer'>
-              <img className={ styles.icon } src={ Twitter } alt='twitter'/>
-            </a>
-            <a href='https://github.com/YusofBandar' target='_blank' rel='noopener noreferrer'>
-              <img className={ styles.icon } src={ Github } alt='github'/>
-            </a>
-          </footer>
+            <div className={ styles.app }>
+                { !isLoading &&
+                <TrajectoriesStates
+                    title='US States Positive Cases Trajectories'
+                    data={ response }
+                    dimension='positiveIncrease'
+                    maxValue={ 8000 }/> }
+                { isLoading && <LoadingSpinner/> }
+                { !isLoading &&
+                    <TrajectoriesStates
+                        title='US States Number of Deaths Trajectories'
+                        data={ response }
+                        dimension='deathIncrease'
+                        maxValue={ 800 }/> }
+                { isLoading && <LoadingSpinner/> }
+                { !isLoading &&
+                    <ScalesStates
+                        title='US States Number of Positive Cases'
+                        data={ response }
+                        dimension='positive'/> }
+                { isLoading && <LoadingSpinner/> }
+                { !isLoading &&
+                    <ScalesStates
+                        title='US States Number of Deaths'
+                        data={ response }
+                        dimension='death'/> }
+                { isLoading && <LoadingSpinner/> }
+                { !isLoading &&
+                    <CircleStates
+                        title='US States Number of Positive Cases Compared to the Number of Deaths'
+                        data={ response }
+                        parentDimension='positive'
+                        childDimension='death'/> }
+                { isLoading && <LoadingSpinner/> }
+            </div>
+            <footer className={ styles.footer }>
+                <span className={ styles.author }>Yusof Bandar</span>
+                <a href='https://twitter.com/BandarYusof' target='_blank' rel='noopener noreferrer'>
+                    <img className={ styles.icon } src={ Twitter } alt='twitter'/>
+                </a>
+                <a href='https://github.com/YusofBandar' target='_blank' rel='noopener noreferrer'>
+                    <img className={ styles.icon } src={ Github } alt='github'/>
+                </a>
+            </footer>
         </IndexContext.Provider>
     );
 }
@@ -99,8 +99,8 @@ function useFetch(url, options) {
 
 function useStateData(){
     const [ isFetchLoading, response ] = useFetch(
-      !window.location.href.includes('api') ? './daily.json' :
-      'https://covidtracking.com/api/v1/states/daily.json');
+        !window.location.href.includes('api') ? './daily.json' :
+        'https://covidtracking.com/api/v1/states/daily.json');
 
     const [ data, setData ] = useState();
     const [ isLoading, setIsLoading ] = useState(true);
@@ -108,16 +108,16 @@ function useStateData(){
     useEffect(() => {
         if(!isFetchLoading){
             const stateData = response
-                  .filter(d => StatesService.abbrStateToName(d.state))
-                  .map(d => {
-                      const label = StatesService.abbrStateToName(d.state);
-                      const meta = states[label];
-                      return {
-                          ...meta,
-                          data: { ...d },
-                          label: meta.displayName
-                      }
-                  });
+                .filter(d => StatesService.abbrStateToName(d.state))
+                .map(d => {
+                    const label = StatesService.abbrStateToName(d.state);
+                    const meta = states[label];
+                    return {
+                        ...meta,
+                        data: { ...d },
+                        label: meta.displayName
+                    }
+                });
             const groups = StatesService.groupByState(stateData);
             const maxLen = getMaxDataLength(groups);
 
