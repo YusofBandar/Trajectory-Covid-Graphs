@@ -1,7 +1,10 @@
 # Trajectory-Covid-Graphs
 
 Just me messing about with different ways to visulisation the current Covid-19 situation. The first visulisation shows the trajectory of each US state.
-The second visulisation trys to show how each US state is coping by scaling each state abbreviation.
+The second visulisation trys to show how each US state is coping by scaling each state abbreviation. The third visulisation uses nested circles to show 
+the proportion of deaths compared to the number of positive cases.
+
+https://yusofbandar.github.io/Trajectory-Covid-Graphs/?api
 
 ## Data
 
