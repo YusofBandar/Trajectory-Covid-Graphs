@@ -3,13 +3,4 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 150px 0;
-}
-
-.map:first-child {
-    padding: 10px 0 150px 0;
-}
-
-.map:not(:last-child) {
-    border-bottom: solid 2px white;
 }
