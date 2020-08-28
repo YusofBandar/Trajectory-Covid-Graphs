@@ -8,7 +8,7 @@ import styles from './Label.module.css';
  */
 function Label({ label, x, y, scale }) {
     return (
-        <g className={ styles.label } style={{ transform: `translate(${ x }px, ${ y }px)`, fontSize: `${ scale }px` }}>
+        <g className={ styles.label } style={{ transform: `translate(${ x + 25 }px, ${ y }px)`, fontSize: `${ scale }px` }}>
             <text className={ styles.title } x={0} y={0}>{ label }</text>
         </g>
     )
