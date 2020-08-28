@@ -58,7 +58,7 @@ function Map({ title, data, scale, children }) {
     return (
         <div className={ styles.mapWrapper }>
             <h1 className={ styles.title }>{ title }</h1>
-            <svg className={ styles.map }>
+            <svg className={ styles.map } viewBox='0 0 1100 860'>
                 { children(currentPoints) }
             </svg>
             <div className={ styles.controls }>
