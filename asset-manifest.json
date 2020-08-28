@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Trajectory-Covid-Graphs/static/css/main.ddc8339b.chunk.css",
+    "main.css": "/Trajectory-Covid-Graphs/static/css/main.8c9a432b.chunk.css",
     "main.js": "/Trajectory-Covid-Graphs/static/js/main.4af8ed27.chunk.js",
     "main.js.map": "/Trajectory-Covid-Graphs/static/js/main.4af8ed27.chunk.js.map",
     "runtime-main.js": "/Trajectory-Covid-Graphs/static/js/runtime-main.ad4387d6.js",
@@ -8,9 +8,9 @@
     "static/js/2.cca89038.chunk.js": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js",
     "static/js/2.cca89038.chunk.js.map": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js.map",
     "index.html": "/Trajectory-Covid-Graphs/index.html",
-    "precache-manifest.f0610f603885ca6771c3e57c2e067828.js": "/Trajectory-Covid-Graphs/precache-manifest.f0610f603885ca6771c3e57c2e067828.js",
+    "precache-manifest.06721386c9800ae4a1c881260146ee41.js": "/Trajectory-Covid-Graphs/precache-manifest.06721386c9800ae4a1c881260146ee41.js",
     "service-worker.js": "/Trajectory-Covid-Graphs/service-worker.js",
-    "static/css/main.ddc8339b.chunk.css.map": "/Trajectory-Covid-Graphs/static/css/main.ddc8339b.chunk.css.map",
+    "static/css/main.8c9a432b.chunk.css.map": "/Trajectory-Covid-Graphs/static/css/main.8c9a432b.chunk.css.map",
     "static/js/2.cca89038.chunk.js.LICENSE.txt": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js.LICENSE.txt",
     "static/media/github.svg": "/Trajectory-Covid-Graphs/static/media/github.c48d680a.svg",
     "static/media/pause.svg": "/Trajectory-Covid-Graphs/static/media/pause.40475220.svg",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.ad4387d6.js",
     "static/js/2.cca89038.chunk.js",
-    "static/css/main.ddc8339b.chunk.css",
+    "static/css/main.8c9a432b.chunk.css",
     "static/js/main.4af8ed27.chunk.js"
   ]
 }

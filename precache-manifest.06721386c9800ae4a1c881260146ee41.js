@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f1d7407f56cef359ff9572d9fbd7a7d8",
+    "revision": "57cb0b4014530438bdef6f0da3349427",
     "url": "/Trajectory-Covid-Graphs/index.html"
   },
   {
-    "revision": "76981b4778aa37f44e16",
-    "url": "/Trajectory-Covid-Graphs/static/css/main.ddc8339b.chunk.css"
+    "revision": "8bb6941dc511777f8379",
+    "url": "/Trajectory-Covid-Graphs/static/css/main.8c9a432b.chunk.css"
   },
   {
     "revision": "e6a793727420dce2451e",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Trajectory-Covid-Graphs/static/js/2.cca89038.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "76981b4778aa37f44e16",
+    "revision": "8bb6941dc511777f8379",
     "url": "/Trajectory-Covid-Graphs/static/js/main.4af8ed27.chunk.js"
   },
   {
