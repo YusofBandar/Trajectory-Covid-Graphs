@@ -27,39 +27,35 @@ function App() {
     return (
         <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
             <div className={ styles.app }>
+                { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
                 <TrajectoriesStates
                     title='US States Positive Cases Trajectories'
                     data={ response }
                     dimension='positiveIncrease'
                     maxValue={ 8000 }/> }
-                { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
                     <TrajectoriesStates
                         title='US States Number of Deaths Trajectories'
                         data={ response }
                         dimension='deathIncrease'
                         maxValue={ 800 }/> }
-                { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
                     <ScalesStates
                         title='US States Number of Positive Cases'
                         data={ response }
                         dimension='positive'/> }
-                { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
                     <ScalesStates
                         title='US States Number of Deaths'
                         data={ response }
                         dimension='death'/> }
-                { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
                     <CircleStates
                         title='US States Number of Positive Cases Compared to the Number of Deaths'
                         data={ response }
                         parentDimension='positive'
                         childDimension='death'/> }
-                { isLoading && <LoadingSpinner/> }
             </div>
             <footer className={ styles.footer }>
                 <span className={ styles.author }>Yusof Bandar</span>
