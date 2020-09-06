@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import IndexContext from './indexContext';
 import StatesService from './services/statesService';
 import states from './states';
@@ -17,15 +17,29 @@ function App() {
     const [isLoading, response] = useStateData();
     const [index, setIndex] = useState(0);
     const [play, setPlay] = useState(false);
+    
+    const channel = useRef(new BroadcastChannel('covid_graphs_channel'));
 
     useEffect(() => {
         if(!isLoading){
-            setIndex(response.values().next().value.length);
+            const currentIndex = response.values().next().value.length;
+            channel.current.postMessage({ index: currentIndex });
+            setIndex(currentIndex);
         }
     }, [isLoading, response])
 
+    const setDateIndex = (currentIndex) => {
+        const i = typeof currentIndex === 'function' ? currentIndex(index) : currentIndex;
+        channel.current.postMessage({ index: i });
+        setIndex(i);
+    };
+
+    channel.current.onmessage = (ev) => {
+        setIndex(ev.data.index);
+    };
+
     return (
-        <IndexContext.Provider value={{ index, setIndex, play, setPlay }}>
+        <IndexContext.Provider value={{ index, setIndex: setDateIndex, play, setPlay }}>
             <div className={ styles.app }>
                 { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
