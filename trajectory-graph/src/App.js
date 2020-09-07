@@ -28,6 +28,12 @@ function App() {
         }
     }, [isLoading, response])
 
+    const setPlayState = (state) => {
+        const p = typeof state === 'function' ? state(play) : state;
+        setPlay(p);
+        channel.current.postMessage({ play: p });
+    };
+
     const setDateIndex = (currentIndex) => {
         const i = typeof currentIndex === 'function' ? currentIndex(index) : currentIndex;
         channel.current.postMessage({ index: i });
@@ -35,11 +41,16 @@ function App() {
     };
 
     channel.current.onmessage = (ev) => {
-        setIndex(ev.data.index);
+        if('index' in ev.data){
+            setIndex(ev.data.index);
+        }
+        if('play' in ev.data){
+            setPlay(ev.data.play);
+        }
     };
 
     return (
-        <IndexContext.Provider value={{ index, setIndex: setDateIndex, play, setPlay }}>
+        <IndexContext.Provider value={{ index, setIndex: setDateIndex, play, setPlay: setPlayState }}>
             <div className={ styles.app }>
                 { isLoading && <LoadingSpinner/> }
                 { !isLoading &&
