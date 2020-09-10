@@ -82,6 +82,12 @@ function App() {
                         data={ response }
                         parentDimension='positive'
                         childDimension='death'/> }
+                { !isLoading &&
+                    <CircleStates
+                        title='US States Number of Positive Cases Compared to the Number of Total Tests'
+                        data={ response }
+                        parentDimension='totalTestResults'
+                        childDimension='positive'/> }
             </div>
             <footer className={ styles.footer }>
                 <span className={ styles.author }>Yusof Bandar</span>
