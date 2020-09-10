@@ -18,12 +18,13 @@ function App() {
     const [index, setIndex] = useState(0);
     const [play, setPlay] = useState(false);
     
-    const channel = useRef(new BroadcastChannel('covid_graphs_channel'));
+    const channel = useRef(
+        typeof BroadcastChannel === 'function' && new BroadcastChannel('covid_graphs_channel'));
 
     useEffect(() => {
         if(!isLoading){
             const currentIndex = response.values().next().value.length;
-            channel.current.postMessage({ index: currentIndex });
+            channel.current && channel.current.postMessage({ index: currentIndex });
             setIndex(currentIndex);
         }
     }, [isLoading, response])
@@ -31,12 +32,12 @@ function App() {
     const setPlayState = (state) => {
         const p = typeof state === 'function' ? state(play) : state;
         setPlay(p);
-        channel.current.postMessage({ play: p });
+        channel.current && channel.current.postMessage({ play: p });
     };
 
     const setDateIndex = (currentIndex) => {
         const i = typeof currentIndex === 'function' ? currentIndex(index) : currentIndex;
-        channel.current.postMessage({ index: i });
+        channel.current && channel.current.postMessage({ index: i });
         setIndex(i);
     };
 
